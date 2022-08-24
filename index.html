@@ -1,0 +1,1821 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>SpringMVC笔记</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:first-child { margin-top: -20px; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="mermaid"] svg, [lang="flow"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root { --side-bar-bg-color: #fafafa; --control-text-color: #777; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body { font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, "Segoe UI Emoji", sans-serif; color: rgb(0, 64, 80); line-height: 1.6; }
+#write { max-width: 860px; margin: 0px auto; padding: 30px 30px 100px; }
+@media only screen and (min-width: 1400px) {
+  #write { max-width: 1024px; }
+}
+@media only screen and (min-width: 1800px) {
+  #write { max-width: 1200px; }
+}
+#write > ul:first-child, #write > ol:first-child { margin-top: 30px; }
+a { color: rgb(65, 131, 196); }
+h1, h2, h3, h4, h5, h6 { position: relative; margin-top: 1rem; margin-bottom: 1rem; font-weight: bold; line-height: 1.4; cursor: text; }
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor { text-decoration: none; }
+h1 tt, h1 code { font-size: inherit; }
+h2 tt, h2 code { font-size: inherit; }
+h3 tt, h3 code { font-size: inherit; }
+h4 tt, h4 code { font-size: inherit; }
+h5 tt, h5 code { font-size: inherit; }
+h6 tt, h6 code { font-size: inherit; }
+h1 { font-size: 2.25em; line-height: 1.2; border-bottom: 1px solid rgb(238, 238, 238); }
+h2 { font-size: 1.75em; line-height: 1.225; border-bottom: 1px solid rgb(238, 238, 238); }
+h3 { font-size: 1.5em; line-height: 1.43; }
+h4 { font-size: 1.25em; }
+h5 { font-size: 1em; }
+h6 { font-size: 1em; color: rgb(119, 119, 119); }
+p, blockquote, ul, ol, dl, table { margin: 0.8em 0px; }
+li > ol, li > ul { margin: 0px; }
+hr { height: 2px; padding: 0px; margin: 16px 0px; background-color: rgb(231, 231, 231); border: 0px none; overflow: hidden; box-sizing: content-box; }
+li p.first { display: inline-block; }
+ul, ol { padding-left: 30px; }
+ul:first-child, ol:first-child { margin-top: 0px; }
+ul:last-child, ol:last-child { margin-bottom: 0px; }
+blockquote { border-left: 5px solid rgb(66, 185, 131); padding: 8px 15px; color: rgb(33, 93, 66); background-color: rgb(243, 245, 247); }
+blockquote blockquote { padding-right: 0px; }
+table { padding: 0px; word-break: initial; }
+table tr { border: 1px solid rgb(223, 226, 229); margin: 0px; padding: 0px; }
+table tr:nth-child(2n), thead { background-color: rgb(248, 248, 248); }
+table th { font-weight: bold; border-width: 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-left-style: solid; border-top-color: rgb(223, 226, 229); border-right-color: rgb(223, 226, 229); border-left-color: rgb(223, 226, 229); border-image: initial; border-bottom-style: initial; border-bottom-color: initial; margin: 0px; padding: 6px 13px; }
+table td { border: 1px solid rgb(223, 226, 229); margin: 0px; padding: 6px 13px; }
+table th:first-child, table td:first-child { margin-top: 0px; }
+table th:last-child, table td:last-child { margin-bottom: 0px; }
+.CodeMirror-lines { padding-left: 4px; }
+.code-tooltip { box-shadow: rgba(0, 28, 36, 0.3) 0px 1px 1px 0px; border-top: 1px solid rgb(238, 242, 242); }
+.md-fences, code, tt { border: 1px solid rgb(231, 234, 237); background-color: rgb(248, 248, 248); border-radius: 3px; padding: 2px 4px 0px; font-size: 0.9em; }
+code { background-color: rgb(243, 244, 244); padding: 2px; color: rgb(209, 37, 115); }
+.md-fences { margin-bottom: 15px; margin-top: 15px; padding-top: 8px; padding-bottom: 6px; }
+.md-task-list-item > input { margin-left: -1.3em; }
+@media print {
+  html { font-size: 13px; }
+  table, pre { break-inside: avoid; }
+  pre { word-wrap: break-word; }
+}
+.md-fences { background-color: rgb(248, 248, 248); }
+#write pre.md-meta-block { padding: 1rem; font-size: 85%; line-height: 1.45; background-color: rgb(247, 247, 247); border: 0px; border-radius: 3px; color: rgb(119, 119, 119); margin-top: 0px !important; }
+.mathjax-block > .code-tooltip { bottom: 0.375rem; }
+.md-mathjax-midline { background: rgb(250, 250, 250); }
+#write > h3.md-focus::before { left: -1.5625rem; top: 0.375rem; }
+#write > h4.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h5.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h6.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+.md-image > .md-meta { border-radius: 3px; padding: 2px 0px 0px 4px; font-size: 0.9em; color: inherit; }
+.md-tag { color: rgb(167, 167, 167); opacity: 1; }
+.md-toc { margin-top: 20px; padding-bottom: 20px; }
+.sidebar-tabs { border-bottom: none; }
+#typora-quick-open { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); }
+#typora-quick-open-item { background-color: rgb(250, 250, 250); border-color: rgb(254, 254, 254) rgb(229, 229, 229) rgb(229, 229, 229) rgb(238, 238, 238); border-style: solid; border-width: 1px; }
+.on-focus-mode blockquote { border-left-color: rgba(85, 85, 85, 0.12); }
+header, .context-menu, .megamenu-content, footer { font-family: "Segoe UI", Arial, sans-serif; }
+.file-node-content:hover .file-node-icon, .file-node-content:hover .file-node-open-state { visibility: visible; }
+.mac-seamless-mode #typora-sidebar { background-color: var(--side-bar-bg-color); }
+.md-lang { color: rgb(180, 101, 77); }
+#md-notification .btn { border: 0px; }
+.dropdown-menu .divider { border-color: rgb(229, 229, 229); opacity: 0.4; }
+.ty-preferences .window-content { background-color: rgb(250, 250, 250); }
+.ty-preferences .nav-group-item.active { color: white; background: rgb(153, 153, 153); }
+.menu-item-container a.menu-style-btn { background-color: rgb(245, 248, 250); background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)); }
+#write mark { background: transparent; color: rgb(216, 105, 105); font-weight: bold; }
+p .md-image:only-child { width: auto; text-align: left; }
+
+
+.cm-s-inner { background-color: rgb(38, 50, 56); color: rgb(233, 237, 237); }
+.cm-s-inner .CodeMirror-gutters { background: rgb(38, 50, 56); color: rgb(83, 127, 126); border: none; }
+.cm-s-inner .CodeMirror-guttermarker, .cm-s-inner .CodeMirror-guttermarker-subtle, .cm-s-inner .CodeMirror-linenumber { color: rgb(83, 127, 126); }
+.cm-s-inner .CodeMirror-cursor { border-left: 1px solid rgb(248, 248, 240); }
+.cm-s-inner div.CodeMirror-selected { background: rgba(255, 255, 255, 0.15); }
+.cm-s-inner.CodeMirror-focused div.CodeMirror-selected { background: rgba(255, 255, 255, 0.1); }
+.cm-s-inner .CodeMirror-line::selection, .cm-s-inner .CodeMirror-line > span::selection, .cm-s-inner .CodeMirror-line > span > span::selection { background: rgba(255, 255, 255, 0.1); }
+.cm-s-inner .CodeMirror-activeline-background { background: rgba(0, 0, 0, 0); }
+.cm-s-inner .cm-keyword { color: rgb(199, 146, 234); }
+.cm-s-inner .cm-operator { color: rgb(233, 237, 237); }
+.cm-s-inner .cm-variable-2 { color: rgb(128, 203, 196); }
+.cm-s-inner .cm-variable-3 { color: rgb(158, 255, 255); }
+.cm-s-inner .cm-builtin { color: rgb(222, 203, 107); }
+.cm-s-inner .cm-atom { color: rgb(247, 118, 105); }
+.cm-s-inner .cm-number { color: rgb(247, 118, 105); }
+.cm-s-inner .cm-def { color: rgb(233, 237, 237); }
+.cm-s-inner .cm-string { color: rgb(195, 232, 141); }
+.cm-s-inner .cm-string-2 { color: rgb(128, 203, 196); }
+.cm-s-inner .cm-comment { color: rgb(84, 110, 122); }
+.cm-s-inner .cm-variable { color: rgb(158, 255, 255); }
+.cm-s-inner .cm-tag { color: rgb(128, 203, 196); }
+.cm-s-inner .cm-meta { color: rgb(128, 203, 196); }
+.cm-s-inner .cm-attribute { color: rgb(255, 203, 107); }
+.cm-s-inner .cm-property { color: rgb(128, 203, 174); }
+.cm-s-inner .cm-qualifier { color: rgb(222, 203, 107); }
+.cm-s-inner .cm-variable-3 { color: rgb(222, 203, 107); }
+.cm-s-inner .cm-tag { color: rgb(255, 83, 112); }
+.cm-s-inner .cm-error { color: rgb(255, 255, 255); background-color: rgb(236, 95, 103); }
+.cm-s-inner .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }
+.md-fences { background-color: rgb(38, 50, 56); color: rgb(233, 237, 237); border: none; }
+.md-fences .code-tooltip { background-color: rgb(38, 50, 56); }
+
+
+
+
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = 'is-node first-line-indent'><h1><a name='header-n0' class='md-header-anchor '></a>SpringMVC</h1><div class='md-toc' mdtype='toc'><p class="md-toc-content"><span class="md-toc-item md-toc-h1" data-ref="n0"><a class="md-toc-inner" href="#header-n0">SpringMVC</a></span><span class="md-toc-item md-toc-h1" data-ref="n3"><a class="md-toc-inner" href="#header-n3">一、SpringMVC简介</a></span><span class="md-toc-item md-toc-h3" data-ref="n4"><a class="md-toc-inner" href="#header-n4">1. 什么是MVC</a></span><span class="md-toc-item md-toc-h3" data-ref="n19"><a class="md-toc-inner" href="#header-n19">2. 什么是SpringMVC</a></span><span class="md-toc-item md-toc-h3" data-ref="n25"><a class="md-toc-inner" href="#header-n25">3. SpringMVC的特点</a></span><span class="md-toc-item md-toc-h1" data-ref="n40"><a class="md-toc-inner" href="#header-n40">二、HelloWorld</a></span><span class="md-toc-item md-toc-h3" data-ref="n41"><a class="md-toc-inner" href="#header-n41">1. 开发环境</a></span><span class="md-toc-item md-toc-h3" data-ref="n47"><a class="md-toc-inner" href="#header-n47">2. 创建maven工程</a></span><span class="md-toc-item md-toc-h4" data-ref="n48"><a class="md-toc-inner" href="#header-n48">2.1 添加web模块</a></span><span class="md-toc-item md-toc-h4" data-ref="n49"><a class="md-toc-inner" href="#header-n49">2.2 打包方式：war</a></span><span class="md-toc-item md-toc-h4" data-ref="n50"><a class="md-toc-inner" href="#header-n50">2.3 引入依赖</a></span><span class="md-toc-item md-toc-h3" data-ref="n54"><a class="md-toc-inner" href="#header-n54">3. 配置web.xml</a></span><span class="md-toc-item md-toc-h4" data-ref="n56"><a class="md-toc-inner" href="#header-n56">3.1 默认配置方式</a></span><span class="md-toc-item md-toc-h4" data-ref="n59"><a class="md-toc-inner" href="#header-n59">3.2 扩展配置方式</a></span><span class="md-toc-item md-toc-h3" data-ref="n68"><a class="md-toc-inner" href="#header-n68">4. 创建请求控制器</a></span><span class="md-toc-item md-toc-h3" data-ref="n74"><a class="md-toc-inner" href="#header-n74">5. 创建springMVC的配置文件</a></span><span class="md-toc-item md-toc-h3" data-ref="n76"><a class="md-toc-inner" href="#header-n76">6. 测试HelloWorld</a></span><span class="md-toc-item md-toc-h4" data-ref="n77"><a class="md-toc-inner" href="#header-n77">6.1 实现对首页的访问</a></span><span class="md-toc-item md-toc-h4" data-ref="n80"><a class="md-toc-inner" href="#header-n80">6.2 通过超链接跳转到指定页面</a></span><span class="md-toc-item md-toc-h3" data-ref="n85"><a class="md-toc-inner" href="#header-n85">7. 总结</a></span><span class="md-toc-item md-toc-h1" data-ref="n88"><a class="md-toc-inner" href="#header-n88">三、@RequestMapping注解</a></span><span class="md-toc-item md-toc-h3" data-ref="n89"><a class="md-toc-inner" href="#header-n89">1. @RequestMapping注解的功能</a></span><span class="md-toc-item md-toc-h3" data-ref="n93"><a class="md-toc-inner" href="#header-n93">2. @RequestMapping注解的位置</a></span><span class="md-toc-item md-toc-h3" data-ref="n98"><a class="md-toc-inner" href="#header-n98">3. @RequestMapping注解的value属性</a></span><span class="md-toc-item md-toc-h3" data-ref="n105"><a class="md-toc-inner" href="#header-n105">4. @RequestMapping注解的method属性</a></span><span class="md-toc-item md-toc-h3" data-ref="n122"><a class="md-toc-inner" href="#header-n122">5. @RequestMapping注解的params属性（了解）</a></span><span class="md-toc-item md-toc-h3" data-ref="n135"><a class="md-toc-inner" href="#header-n135">6. @RequestMapping注解的headers属性（了解）</a></span><span class="md-toc-item md-toc-h3" data-ref="n144"><a class="md-toc-inner" href="#header-n144">7. SpringMVC支持ant风格的路径</a></span><span class="md-toc-item md-toc-h3" data-ref="n150"><a class="md-toc-inner" href="#header-n150">8. SpringMVC支持路径中的占位符（重点）</a></span><span class="md-toc-item md-toc-h1" data-ref="n157"><a class="md-toc-inner" href="#header-n157">四、SpringMVC获取请求参数</a></span><span class="md-toc-item md-toc-h3" data-ref="n158"><a class="md-toc-inner" href="#header-n158">1. 通过ServletAPI获取</a></span><span class="md-toc-item md-toc-h3" data-ref="n161"><a class="md-toc-inner" href="#header-n161">2. 通过控制器方法的形参获取请求参数</a></span><span class="md-toc-item md-toc-h3" data-ref="n170"><a class="md-toc-inner" href="#header-n170">3. @RequestParam</a></span><span class="md-toc-item md-toc-h3" data-ref="n178"><a class="md-toc-inner" href="#header-n178">4. @RequestHeader</a></span><span class="md-toc-item md-toc-h3" data-ref="n182"><a class="md-toc-inner" href="#header-n182">5. @CookieValue</a></span><span class="md-toc-item md-toc-h3" data-ref="n186"><a class="md-toc-inner" href="#header-n186">6. 通过POJO获取请求参数</a></span><span class="md-toc-item md-toc-h3" data-ref="n190"><a class="md-toc-inner" href="#header-n190">7. 解决获取请求参数的乱码问题</a></span><span class="md-toc-item md-toc-h1" data-ref="n196"><a class="md-toc-inner" href="#header-n196">五、域对象共享数据</a></span><span class="md-toc-item md-toc-h3" data-ref="n197"><a class="md-toc-inner" href="#header-n197">1. 使用ServletAPI向request域对象共享数据</a></span><span class="md-toc-item md-toc-h3" data-ref="n199"><a class="md-toc-inner" href="#header-n199">2. 使用ModelAndView向request域对象共享数据</a></span><span class="md-toc-item md-toc-h3" data-ref="n201"><a class="md-toc-inner" href="#header-n201">3. 使用Model向request域对象共享数据</a></span><span class="md-toc-item md-toc-h3" data-ref="n203"><a class="md-toc-inner" href="#header-n203">4. 使用map向request域对象共享数据</a></span><span class="md-toc-item md-toc-h3" data-ref="n205"><a class="md-toc-inner" href="#header-n205">5. 使用ModelMap向request域对象共享数据</a></span><span class="md-toc-item md-toc-h3" data-ref="n207"><a class="md-toc-inner" href="#header-n207">6. Model、ModelMap、Map的关系</a></span><span class="md-toc-item md-toc-h3" data-ref="n210"><a class="md-toc-inner" href="#header-n210">7. 向session域共享数据</a></span><span class="md-toc-item md-toc-h3" data-ref="n212"><a class="md-toc-inner" href="#header-n212">8. 向application域共享数据</a></span><span class="md-toc-item md-toc-h1" data-ref="n214"><a class="md-toc-inner" href="#header-n214">六、SpringMVC的视图</a></span><span class="md-toc-item md-toc-h3" data-ref="n220"><a class="md-toc-inner" href="#header-n220">1. ThymeleafView</a></span><span class="md-toc-item md-toc-h3" data-ref="n224"><a class="md-toc-inner" href="#header-n224">2. 转发视图</a></span><span class="md-toc-item md-toc-h3" data-ref="n232"><a class="md-toc-inner" href="#header-n232">3. 重定向视图</a></span><span class="md-toc-item md-toc-h3" data-ref="n242"><a class="md-toc-inner" href="#header-n242">4. 视图控制器view-controller</a></span><span class="md-toc-item md-toc-h1" data-ref="n249"><a class="md-toc-inner" href="#header-n249">七、RESTful</a></span><span class="md-toc-item md-toc-h3" data-ref="n250"><a class="md-toc-inner" href="#header-n250">1. RESTful简介</a></span><span class="md-toc-item md-toc-h4" data-ref="n253"><a class="md-toc-inner" href="#header-n253">1.1 资源</a></span><span class="md-toc-item md-toc-h4" data-ref="n256"><a class="md-toc-inner" href="#header-n256">1.2 资源的表述</a></span><span class="md-toc-item md-toc-h4" data-ref="n259"><a class="md-toc-inner" href="#header-n259">1.3 状态转移</a></span><span class="md-toc-item md-toc-h3" data-ref="n262"><a class="md-toc-inner" href="#header-n262">2. RESTful的实现</a></span><span class="md-toc-item md-toc-h3" data-ref="n288"><a class="md-toc-inner" href="#header-n288">3. HiddenHttpMethodFilter</a></span><span class="md-toc-item md-toc-h1" data-ref="n319"><a class="md-toc-inner" href="#header-n319">八、RESTful案例</a></span><span class="md-toc-item md-toc-h3" data-ref="n320"><a class="md-toc-inner" href="#header-n320">1. 准备工作</a></span><span class="md-toc-item md-toc-h3" data-ref="n331"><a class="md-toc-inner" href="#header-n331">2. 功能清单</a></span><span class="md-toc-item md-toc-h3" data-ref="n365"><a class="md-toc-inner" href="#header-n365">3. 具体功能：访问首页</a></span><span class="md-toc-item md-toc-h5" data-ref="n366"><a class="md-toc-inner" href="#header-n366">a&gt;配置view-controller</a></span><span class="md-toc-item md-toc-h5" data-ref="n368"><a class="md-toc-inner" href="#header-n368">b&gt;创建页面</a></span><span class="md-toc-item md-toc-h3" data-ref="n370"><a class="md-toc-inner" href="#header-n370">4. 具体功能：查询所有员工数据</a></span><span class="md-toc-item md-toc-h4" data-ref="n371"><a class="md-toc-inner" href="#header-n371">4.1 控制器方法</a></span><span class="md-toc-item md-toc-h4" data-ref="n373"><a class="md-toc-inner" href="#header-n373">4.2 创建employee_list.html</a></span><span class="md-toc-item md-toc-h3" data-ref="n375"><a class="md-toc-inner" href="#header-n375">5. 具体功能：删除</a></span><span class="md-toc-item md-toc-h4" data-ref="n376"><a class="md-toc-inner" href="#header-n376">5.1 创建处理delete请求方式的表单</a></span><span class="md-toc-item md-toc-h5" data-ref="n378"><a class="md-toc-inner" href="#header-n378">5.2 删除超链接绑定点击事件</a></span><span class="md-toc-item md-toc-h4" data-ref="n385"><a class="md-toc-inner" href="#header-n385">5.3 控制器方法</a></span><span class="md-toc-item md-toc-h3" data-ref="n387"><a class="md-toc-inner" href="#header-n387">6. 具体功能：跳转到添加数据页面</a></span><span class="md-toc-item md-toc-h4" data-ref="n388"><a class="md-toc-inner" href="#header-n388">6.1 配置view-controller</a></span><span class="md-toc-item md-toc-h4" data-ref="n390"><a class="md-toc-inner" href="#header-n390">6.2 创建employee_add.html</a></span><span class="md-toc-item md-toc-h3" data-ref="n392"><a class="md-toc-inner" href="#header-n392">7. 具体功能：执行保存</a></span><span class="md-toc-item md-toc-h4" data-ref="n393"><a class="md-toc-inner" href="#header-n393">7.1 控制器方法</a></span><span class="md-toc-item md-toc-h3" data-ref="n395"><a class="md-toc-inner" href="#header-n395">8. 具体功能：跳转到更新数据页面</a></span><span class="md-toc-item md-toc-h4" data-ref="n396"><a class="md-toc-inner" href="#header-n396">8.1 修改超链接</a></span><span class="md-toc-item md-toc-h4" data-ref="n398"><a class="md-toc-inner" href="#header-n398">8.2 控制器方法</a></span><span class="md-toc-item md-toc-h4" data-ref="n400"><a class="md-toc-inner" href="#header-n400">8.3 创建employee_update.html</a></span><span class="md-toc-item md-toc-h3" data-ref="n402"><a class="md-toc-inner" href="#header-n402">9. 具体功能：执行更新</a></span><span class="md-toc-item md-toc-h4" data-ref="n403"><a class="md-toc-inner" href="#header-n403">9.1 控制器方法</a></span><span class="md-toc-item md-toc-h1" data-ref="n405"><a class="md-toc-inner" href="#header-n405">九、HttpMessageConverter</a></span><span class="md-toc-item md-toc-h3" data-ref="n409"><a class="md-toc-inner" href="#header-n409">1. @RequestBody</a></span><span class="md-toc-item md-toc-h3" data-ref="n415"><a class="md-toc-inner" href="#header-n415">2. RequestEntity</a></span><span class="md-toc-item md-toc-h3" data-ref="n420"><a class="md-toc-inner" href="#header-n420">3. @ResponseBody</a></span><span class="md-toc-item md-toc-h3" data-ref="n429"><a class="md-toc-inner" href="#header-n429">4. SpringMVC处理json</a></span><span class="md-toc-item md-toc-h3" data-ref="n445"><a class="md-toc-inner" href="#header-n445">5. SpringMVC处理ajax</a></span><span class="md-toc-item md-toc-h3" data-ref="n455"><a class="md-toc-inner" href="#header-n455">6. @RestController注解</a></span><span class="md-toc-item md-toc-h3" data-ref="n458"><a class="md-toc-inner" href="#header-n458">7. ResponseEntity</a></span><span class="md-toc-item md-toc-h1" data-ref="n461"><a class="md-toc-inner" href="#header-n461">十、文件上传和下载</a></span><span class="md-toc-item md-toc-h3" data-ref="n462"><a class="md-toc-inner" href="#header-n462">1. 文件下载</a></span><span class="md-toc-item md-toc-h3" data-ref="n466"><a class="md-toc-inner" href="#header-n466">2. 文件上传</a></span><span class="md-toc-item md-toc-h1" data-ref="n480"><a class="md-toc-inner" href="#header-n480">十一、拦截器</a></span><span class="md-toc-item md-toc-h3" data-ref="n481"><a class="md-toc-inner" href="#header-n481">1. 拦截器的配置</a></span><span class="md-toc-item md-toc-h3" data-ref="n487"><a class="md-toc-inner" href="#header-n487">2. 拦截器的三个抽象方法</a></span><span class="md-toc-item md-toc-h3" data-ref="n493"><a class="md-toc-inner" href="#header-n493">3. 多个拦截器的执行顺序</a></span><span class="md-toc-item md-toc-h1" data-ref="n504"><a class="md-toc-inner" href="#header-n504">十二、异常处理器</a></span><span class="md-toc-item md-toc-h3" data-ref="n505"><a class="md-toc-inner" href="#header-n505">1. 基于配置的异常处理</a></span><span class="md-toc-item md-toc-h3" data-ref="n511"><a class="md-toc-inner" href="#header-n511">2. 基于注解的异常处理</a></span><span class="md-toc-item md-toc-h1" data-ref="n513"><a class="md-toc-inner" href="#header-n513">十三、注解配置SpringMVC</a></span><span class="md-toc-item md-toc-h3" data-ref="n516"><a class="md-toc-inner" href="#header-n516">1. 创建初始化类，代替web.xml</a></span><span class="md-toc-item md-toc-h3" data-ref="n520"><a class="md-toc-inner" href="#header-n520">2. 创建SpringConfig配置类，代替spring的配置文件</a></span><span class="md-toc-item md-toc-h3" data-ref="n522"><a class="md-toc-inner" href="#header-n522">3. 创建WebConfig配置类，代替SpringMVC的配置文件</a></span><span class="md-toc-item md-toc-h3" data-ref="n524"><a class="md-toc-inner" href="#header-n524">4. 测试功能</a></span><span class="md-toc-item md-toc-h1" data-ref="n526"><a class="md-toc-inner" href="#header-n526">十四、SpringMVC执行流程</a></span><span class="md-toc-item md-toc-h3" data-ref="n527"><a class="md-toc-inner" href="#header-n527">1. SpringMVC常用组件</a></span><span class="md-toc-item md-toc-h3" data-ref="n553"><a class="md-toc-inner" href="#header-n553">2. DispatcherServlet初始化过程</a></span><span class="md-toc-item md-toc-h4" data-ref="n557"><a class="md-toc-inner" href="#header-n557">2.1 初始化WebApplicationContext</a></span><span class="md-toc-item md-toc-h4" data-ref="n561"><a class="md-toc-inner" href="#header-n561">2.2 创建WebApplicationContext</a></span><span class="md-toc-item md-toc-h4" data-ref="n565"><a class="md-toc-inner" href="#header-n565">2.3 DispatcherServlet初始化策略</a></span><span class="md-toc-item md-toc-h3" data-ref="n570"><a class="md-toc-inner" href="#header-n570">3. DispatcherServlet调用组件处理请求</a></span><span class="md-toc-item md-toc-h4" data-ref="n571"><a class="md-toc-inner" href="#header-n571">3.1 processRequest()</a></span><span class="md-toc-item md-toc-h4" data-ref="n576"><a class="md-toc-inner" href="#header-n576">3.2 doService()</a></span><span class="md-toc-item md-toc-h4" data-ref="n580"><a class="md-toc-inner" href="#header-n580">3.3 doDispatch()</a></span><span class="md-toc-item md-toc-h4" data-ref="n584"><a class="md-toc-inner" href="#header-n584">3.4 processDispatchResult()</a></span><span class="md-toc-item md-toc-h3" data-ref="n586"><a class="md-toc-inner" href="#header-n586">4. SpringMVC的执行流程</a></span><span class="md-toc-item md-toc-h1" data-ref="n614"><a class="md-toc-inner" href="#header-n614">十五、SSM整合</a></span><span class="md-toc-item md-toc-h3" data-ref="n615"><a class="md-toc-inner" href="#header-n615">1. ContextLoaderListener</a></span><span class="md-toc-item md-toc-h3" data-ref="n619"><a class="md-toc-inner" href="#header-n619">2. 导入依赖</a></span><span class="md-toc-item md-toc-h3" data-ref="n621"><a class="md-toc-inner" href="#header-n621">3. 创建表</a></span><span class="md-toc-item md-toc-h3" data-ref="n623"><a class="md-toc-inner" href="#header-n623">4. 配置web.xml</a></span><span class="md-toc-item md-toc-h3" data-ref="n625"><a class="md-toc-inner" href="#header-n625">5. 创建SpringMVC的配置文件并配置</a></span><span class="md-toc-item md-toc-h3" data-ref="n627"><a class="md-toc-inner" href="#header-n627">6. 搭建MyBatis环境</a></span><span class="md-toc-item md-toc-h4" data-ref="n628"><a class="md-toc-inner" href="#header-n628">6.1 创建属性文件jdbc.properties</a></span><span class="md-toc-item md-toc-h4" data-ref="n630"><a class="md-toc-inner" href="#header-n630">6.2 创建MyBatis核心配置文件mybatis-config.xml</a></span><span class="md-toc-item md-toc-h4" data-ref="n632"><a class="md-toc-inner" href="#header-n632">6.3 创建Mapper接口和映射文件</a></span><span class="md-toc-item md-toc-h4" data-ref="n635"><a class="md-toc-inner" href="#header-n635">6.4 创建日志文件log4j.xml</a></span><span class="md-toc-item md-toc-h3" data-ref="n637"><a class="md-toc-inner" href="#header-n637">7. 创建Spring配置文件并配置</a></span><span class="md-toc-item md-toc-h3" data-ref="n639"><a class="md-toc-inner" href="#header-n639">8. 功能测试</a></span><span class="md-toc-item md-toc-h4" data-ref="n640"><a class="md-toc-inner" href="#header-n640">8.1 创建组件</a></span><span class="md-toc-item md-toc-h4" data-ref="n653"><a class="md-toc-inner" href="#header-n653">8.2 创建页面</a></span><span class="md-toc-item md-toc-h4" data-ref="n655"><a class="md-toc-inner" href="#header-n655">8.3 测试分页功能</a></span><span class="md-toc-item md-toc-h1" data-ref="n658"><a class="md-toc-inner" href="#header-n658">十六、后会有期</a></span></p></div><h1><a name='header-n3' class='md-header-anchor '></a>一、SpringMVC简介</h1><h3><a name='header-n4' class='md-header-anchor '></a>1. 什么是MVC</h3><blockquote><p>MVC是一种软件架构的思想，将软件按照模型、视图、控制器来划分</p><p>M：Model，模型层，指工程中的JavaBean，作用是处理数据</p><ul><li><p>JavaBean分为两类：</p><ul><li>一类称为实体类Bean：专门存储业务数据的，如 Student、User 等</li><li>一类称为业务处理 Bean：指 Service 或 Dao 对象，专门用于处理业务逻辑和数据访问。</li></ul></li></ul><p>V：View，视图层，指工程中的html或jsp等页面，作用是与用户进行交互，展示数据</p><p>C：Controller，控制层，指工程中的servlet，作用是接收请求和响应浏览器</p><p>MVC的工作流程：
+用户通过视图层发送请求到服务器，在服务器中请求被Controller接收，Controller调用相应的Model层处理请求，处理完毕将结果返回到Controller，Controller再根据请求处理的结果找到相应的View视图，渲染数据后最终响应给浏览器</p></blockquote><h3><a name='header-n19' class='md-header-anchor '></a>2. 什么是SpringMVC</h3><blockquote><p>SpringMVC是Spring的一个后续产品，是Spring的一个子项目。</p><p>SpringMVC 是 Spring 为表述层开发提供的一整套完备的解决方案。在表述层框架历经 Strust、WebWork、Strust2 等诸多产品的历代更迭之后，目前业界普遍选择了 SpringMVC 作为 Java EE 项目表述层开发的<strong>首选方案</strong>。</p></blockquote><blockquote><p>注：三层架构分为表述层（或表示层）、业务逻辑层、数据访问层，表述层表示前台页面和后台servlet</p></blockquote><h3><a name='header-n25' class='md-header-anchor '></a>3. SpringMVC的特点</h3><blockquote><ul><li>Spring 家族原生产品**，与 IOC 容器等基础设施无缝对接</li><li><strong>基于原生的Servlet</strong>，通过了功能强大的<strong>前端控制器DispatcherServlet</strong>，对请求和响应进行统一处理</li><li>表述层各细分领域需要解决的问题<strong>全方位覆盖</strong>，提供<strong>全面解决方案</strong></li><li><strong>代码清新简洁</strong>，大幅度提升开发效率</li><li>内部组件化程度高，可插拔式组件<strong>即插即用</strong>，想要什么功能配置相应组件即可</li><li><strong>性能卓著</strong>，尤其适合现代大型、超大型互联网项目要求</li></ul></blockquote><h1><a name='header-n40' class='md-header-anchor '></a>二、HelloWorld</h1><h3><a name='header-n41' class='md-header-anchor '></a>1. 开发环境</h3><blockquote><p>IDE：idea 2019.2</p><p>构建工具：maven3.5.4</p><p>服务器：tomcat7</p><p>Spring版本：5.3.1</p></blockquote><h3><a name='header-n47' class='md-header-anchor '></a>2. 创建maven工程</h3><h4><a name='header-n48' class='md-header-anchor '></a>2.1 添加web模块</h4><h4><a name='header-n49' class='md-header-anchor '></a>2.2 打包方式：war</h4><h4><a name='header-n50' class='md-header-anchor '></a>2.3 引入依赖</h4><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="xml" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="xml"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.99481px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">dependencies</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">&lt;!-- SpringMVC --&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">dependency</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">groupId</span><span class="cm-tag cm-bracket">&gt;</span>org.springframework<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">groupId</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">artifactId</span><span class="cm-tag cm-bracket">&gt;</span>spring-webmvc<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">artifactId</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">version</span><span class="cm-tag cm-bracket">&gt;</span>5.3.1<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">version</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">dependency</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">&lt;!-- 日志 --&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">dependency</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">groupId</span><span class="cm-tag cm-bracket">&gt;</span>ch.qos.logback<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">groupId</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">artifactId</span><span class="cm-tag cm-bracket">&gt;</span>logback-classic<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">artifactId</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">version</span><span class="cm-tag cm-bracket">&gt;</span>1.2.3<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">version</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">dependency</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">&lt;!-- ServletAPI --&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">dependency</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">groupId</span><span class="cm-tag cm-bracket">&gt;</span>javax.servlet<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">groupId</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">artifactId</span><span class="cm-tag cm-bracket">&gt;</span>javax.servlet-api<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">artifactId</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">version</span><span class="cm-tag cm-bracket">&gt;</span>3.1.0<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">version</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">scope</span><span class="cm-tag cm-bracket">&gt;</span>provided<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">scope</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">dependency</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">&lt;!-- Spring5和Thymeleaf整合包 --&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">dependency</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">groupId</span><span class="cm-tag cm-bracket">&gt;</span>org.thymeleaf<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">groupId</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">artifactId</span><span class="cm-tag cm-bracket">&gt;</span>thymeleaf-spring5<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">artifactId</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">version</span><span class="cm-tag cm-bracket">&gt;</span>3.0.12.RELEASE<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">version</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">dependency</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">dependencies</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 675px;"></div><div class="CodeMirror-gutters" style="display: none; height: 675px;"></div></div></div></pre><p>注：由于 Maven 的传递性，我们不必将所有需要的包全部配置依赖，而是配置最顶端的依赖，其他靠传递性导入。</p><p><img src='img\img001.png' alt='images' referrerPolicy='no-referrer' /></p><h3><a name='header-n54' class='md-header-anchor '></a>3. 配置web.xml</h3><p>注册SpringMVC的前端控制器DispatcherServlet</p><h4><a name='header-n56' class='md-header-anchor '></a>3.1 默认配置方式</h4><p>此配置作用下，SpringMVC的配置文件默认位于WEB-INF下，默认名称为&lt;servlet-name&gt;-servlet.xml，例如，以下配置所对应SpringMVC的配置文件位于WEB-INF下，文件名为springMVC-servlet.xml</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="xml" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="xml"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 8.16406px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">&lt;!-- 配置SpringMVC的前端控制器，对浏览器发送的请求统一进行处理 --&gt;</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">servlet</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">servlet-name</span><span class="cm-tag cm-bracket">&gt;</span>springMVC<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">servlet-name</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">servlet-class</span><span class="cm-tag cm-bracket">&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">servlet-class</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">servlet</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">servlet-mapping</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">servlet-name</span><span class="cm-tag cm-bracket">&gt;</span>springMVC<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">servlet-name</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">&lt;!--</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">设置springMVC的核心控制器所能处理的请求的请求路径</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">/所匹配的请求可以是/login或.html或.js或.css方式的请求路径</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">但是/不能匹配.jsp请求路径的请求</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">--&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">url-pattern</span><span class="cm-tag cm-bracket">&gt;</span>/<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">url-pattern</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">servlet-mapping</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 315px;"></div><div class="CodeMirror-gutters" style="display: none; height: 315px;"></div></div></div></pre><h4><a name='header-n59' class='md-header-anchor '></a>3.2 扩展配置方式</h4><p>可通过init-param标签设置SpringMVC配置文件的位置和名称，通过load-on-startup标签设置SpringMVC前端控制器DispatcherServlet的初始化时间</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="xml" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="xml"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 8.16406px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">&lt;!-- 配置SpringMVC的前端控制器，对浏览器发送的请求统一进行处理 --&gt;</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">servlet</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">servlet-name</span><span class="cm-tag cm-bracket">&gt;</span>springMVC<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">servlet-name</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">servlet-class</span><span class="cm-tag cm-bracket">&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">servlet-class</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">&lt;!-- 通过初始化参数指定SpringMVC配置文件的位置和名称 --&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">init-param</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">&lt;!-- contextConfigLocation为固定值 --&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">param-name</span><span class="cm-tag cm-bracket">&gt;</span>contextConfigLocation<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">param-name</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">&lt;!-- 使用classpath:表示从类路径查找配置文件，例如maven工程中的src/main/resources --&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">param-value</span><span class="cm-tag cm-bracket">&gt;</span>classpath:springMVC.xml<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">param-value</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">init-param</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">&lt;!-- </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> <span class="cm-tab" role="presentation" cm-text="	">   </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">作为框架的核心组件，在启动过程中有大量的初始化操作要做</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">而这些操作放在第一次请求时才执行会严重影响访问速度</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">因此需要通过此标签将启动控制DispatcherServlet的初始化时间提前到服务器启动时</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment">--&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">load-on-startup</span><span class="cm-tag cm-bracket">&gt;</span>1<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">load-on-startup</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">servlet</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">servlet-mapping</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">servlet-name</span><span class="cm-tag cm-bracket">&gt;</span>springMVC<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">servlet-name</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">&lt;!--</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">设置springMVC的核心控制器所能处理的请求的请求路径</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">/所匹配的请求可以是/login或.html或.js或.css方式的请求路径</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">但是/不能匹配.jsp请求路径的请求</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">--&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">url-pattern</span><span class="cm-tag cm-bracket">&gt;</span>/<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">url-pattern</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">servlet-mapping</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 608px;"></div><div class="CodeMirror-gutters" style="display: none; height: 608px;"></div></div></div></pre><blockquote><p>注：</p><p>&lt;url-pattern&gt;标签中使用/和/*的区别：</p><p>/所匹配的请求可以是/login或.html或.js或.css方式的请求路径，但是/不能匹配.jsp请求路径的请求</p><p>因此就可以避免在访问jsp页面时，该请求被DispatcherServlet处理，从而找不到相应的页面</p><p>/*则能够匹配所有请求，例如在使用过滤器时，若需要对所有请求进行过滤，就需要使用/*的写法</p></blockquote><h3><a name='header-n68' class='md-header-anchor '></a>4. 创建请求控制器</h3><blockquote><p>由于前端控制器对浏览器发送的请求进行了统一的处理，但是具体的请求有不同的处理过程，因此需要创建处理具体请求的类，即请求控制器</p><p>请求控制器中每一个处理请求的方法成为控制器方法</p><p>因为SpringMVC的控制器由一个POJO（普通的Java类）担任，因此需要通过@Controller注解将其标识为一个控制层组件，交给Spring的IoC容器管理，此时SpringMVC才能够识别控制器的存在</p></blockquote><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 8.16406px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta">@Controller</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span class="cm-keyword">class</span> <span class="cm-def">HelloController</span> {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 90px;"></div><div class="CodeMirror-gutters" style="display: none; height: 90px;"></div></div></div></pre><h3><a name='header-n74' class='md-header-anchor '></a>5. 创建springMVC的配置文件</h3><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="xml" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="xml"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 8.16406px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">&lt;!-- 自动扫描包 --&gt;</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">context:component-scan</span> <span class="cm-attribute">base-package</span>=<span class="cm-string">"com.atguigu.mvc.controller"</span><span class="cm-tag cm-bracket">/&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">&lt;!-- 配置Thymeleaf视图解析器 --&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">bean</span> <span class="cm-attribute">id</span>=<span class="cm-string">"viewResolver"</span> <span class="cm-attribute">class</span>=<span class="cm-string">"org.thymeleaf.spring5.view.ThymeleafViewResolver"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">property</span> <span class="cm-attribute">name</span>=<span class="cm-string">"order"</span> <span class="cm-attribute">value</span>=<span class="cm-string">"1"</span><span class="cm-tag cm-bracket">/&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">property</span> <span class="cm-attribute">name</span>=<span class="cm-string">"characterEncoding"</span> <span class="cm-attribute">value</span>=<span class="cm-string">"UTF-8"</span><span class="cm-tag cm-bracket">/&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">property</span> <span class="cm-attribute">name</span>=<span class="cm-string">"templateEngine"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">bean</span> <span class="cm-attribute">class</span>=<span class="cm-string">"org.thymeleaf.spring5.SpringTemplateEngine"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">property</span> <span class="cm-attribute">name</span>=<span class="cm-string">"templateResolver"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">bean</span> <span class="cm-attribute">class</span>=<span class="cm-string">"org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">&lt;!-- 视图前缀 --&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">property</span> <span class="cm-attribute">name</span>=<span class="cm-string">"prefix"</span> <span class="cm-attribute">value</span>=<span class="cm-string">"/WEB-INF/templates/"</span><span class="cm-tag cm-bracket">/&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">&lt;!-- 视图后缀 --&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">property</span> <span class="cm-attribute">name</span>=<span class="cm-string">"suffix"</span> <span class="cm-attribute">value</span>=<span class="cm-string">".html"</span><span class="cm-tag cm-bracket">/&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">property</span> <span class="cm-attribute">name</span>=<span class="cm-string">"templateMode"</span> <span class="cm-attribute">value</span>=<span class="cm-string">"HTML5"</span><span class="cm-tag cm-bracket">/&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">property</span> <span class="cm-attribute">name</span>=<span class="cm-string">"characterEncoding"</span> <span class="cm-attribute">value</span>=<span class="cm-string">"UTF-8"</span> <span class="cm-tag cm-bracket">/&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">bean</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">property</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">bean</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">property</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">bean</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">&lt;!-- </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; <span class="cm-comment">处理静态资源，例如html、js、css、jpg</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;<span class="cm-comment">若只设置该标签，则只能访问静态资源，其他请求则无法访问</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;<span class="cm-comment">此时必须设置&lt;mvc:annotation-driven/&gt;解决问题</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> <span class="cm-comment">--&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">mvc:default-servlet-handler</span><span class="cm-tag cm-bracket">/&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">&lt;!-- 开启mvc注解驱动 --&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">mvc:annotation-driven</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">mvc:message-converters</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">&lt;!-- 处理响应中文内容乱码 --&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">bean</span> <span class="cm-attribute">class</span>=<span class="cm-string">"org.springframework.http.converter.StringHttpMessageConverter"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">property</span> <span class="cm-attribute">name</span>=<span class="cm-string">"defaultCharset"</span> <span class="cm-attribute">value</span>=<span class="cm-string">"UTF-8"</span> <span class="cm-tag cm-bracket">/&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">property</span> <span class="cm-attribute">name</span>=<span class="cm-string">"supportedMediaTypes"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">list</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">value</span><span class="cm-tag cm-bracket">&gt;</span>text/html<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">value</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">value</span><span class="cm-tag cm-bracket">&gt;</span>application/json<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">value</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">list</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">property</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">bean</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">mvc:message-converters</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">mvc:annotation-driven</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 1058px;"></div><div class="CodeMirror-gutters" style="display: none; height: 1058px;"></div></div></div></pre><h3><a name='header-n76' class='md-header-anchor '></a>6. 测试HelloWorld</h3><h4><a name='header-n77' class='md-header-anchor '></a>6.1 实现对首页的访问</h4><p>在请求控制器中创建处理请求的方法</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 8.16406px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">// @RequestMapping注解：处理请求和控制器方法之间的映射关系</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">// @RequestMapping注解的value属性可以通过请求地址匹配请求，/表示的当前工程的上下文路径</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">// localhost:8080/springMVC/</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta">@RequestMapping</span>(<span class="cm-string">"/"</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span class="cm-variable-3">String</span> <span class="cm-def">index</span>() {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">//设置视图名称</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">return</span> <span class="cm-string">"index"</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 180px;"></div><div class="CodeMirror-gutters" style="display: none; height: 180px;"></div></div></div></pre><h4><a name='header-n80' class='md-header-anchor '></a>6.2 通过超链接跳转到指定页面</h4><p>在主页index.html中设置超链接</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="html"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="html"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 8.16406px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta">&lt;!DOCTYPE html&gt;</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">html</span> <span class="cm-attribute">lang</span>=<span class="cm-string">"en"</span> <span class="cm-attribute">xmlns:th</span>=<span class="cm-string">"http://www.thymeleaf.org"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">head</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">meta</span> <span class="cm-attribute">charset</span>=<span class="cm-string">"UTF-8"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">title</span><span class="cm-tag cm-bracket">&gt;</span>首页<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">title</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">head</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">body</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">h1</span><span class="cm-tag cm-bracket">&gt;</span>首页<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">h1</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">a</span> <span class="cm-attribute">th:href</span>=<span class="cm-string">"@{/hello}"</span><span class="cm-tag cm-bracket">&gt;</span>HelloWorld<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">a</span><span class="cm-tag cm-bracket">&gt;&lt;</span><span class="cm-tag">br</span><span class="cm-tag cm-bracket">/&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">body</span><span class="cm-tag cm-bracket">&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">html</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 248px;"></div><div class="CodeMirror-gutters" style="display: none; height: 248px;"></div></div></div></pre><p>在请求控制器中创建处理请求的方法</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="java"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 8.16406px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta">@RequestMapping</span>(<span class="cm-string">"/hello"</span>)</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">public</span> <span class="cm-variable-3">String</span> <span class="cm-def">HelloWorld</span>() {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">return</span> <span class="cm-string">"target"</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 90px;"></div><div class="CodeMirror-gutters" style="display: none; height: 90px;"></div></div></div></pre><h3><a name='header-n85' class='md-header-anchor '></a>7. 总结</h3><blockquote><p>浏览器发送请求，若请求地址符合前端控制器的url-pattern，该请求就会被前端控制器DispatcherServlet处理。前端控制器会读取SpringMVC的核心配置文件，通过扫描组件找到控制器，将请求地址和控制器中@RequestMapping注解的value属性值进行匹配，若匹配成功，该注解所标识的控制器方法就是处理请求的方法。处理请求的方法需要返回一个字符串类型的视图名称，该视图名称会被视图解析器解析，加上前缀和后缀组成视图的路径，通过Thymeleaf对视图进行渲染，最终转发到视图所对应页面</p></blockquote><h1><a name='header-n88' class='md-header-anchor '></a>三、@RequestMapping注解</h1><h3><a name='header-n89' class='md-header-anchor '></a>1. @RequestMapping注解的功能</h3><blockquote><p>从注解名称上我们可以看到，@RequestMapping注解的作用就是将请求和处理请求的控制器方法关联起来，建立映射关系。</p><p>SpringMVC 接收到指定的请求，就会来找到在映射关系中对应的控制器方法来处理这个请求。</p></blockquote><h3><a name='header-n93' class='md-header-anchor '></a>2. @RequestMapping注解的位置</h3><blockquote><p>@RequestMapping标识一个类：设置映射请求的请求路径的初始信息</p><p>@RequestMapping标识一个方法：设置映射请求请求路径的具体信息</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n97" mdtype="fences">@Controller
+@RequestMapping("/test")
+public class RequestMappingController {
+
+	//此时请求映射所映射的请求的请求路径为：/test/testRequestMapping
+    @RequestMapping("/testRequestMapping")
+    public String testRequestMapping(){
+        return "success";
+    }
+
+}
+</pre><h3><a name='header-n98' class='md-header-anchor '></a>3. @RequestMapping注解的value属性</h3><blockquote><p>@RequestMapping注解的value属性通过请求的请求地址匹配请求映射</p><p>@RequestMapping注解的value属性是一个字符串类型的数组，表示该请求映射能够匹配多个请求地址所对应的请求</p><p>@RequestMapping注解的value属性必须设置，至少通过请求地址匹配请求映射</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n103" mdtype="fences">&lt;a th:href="@{/testRequestMapping}"&gt;测试@RequestMapping的value属性--&gt;/testRequestMapping&lt;/a&gt;&lt;br&gt;
+&lt;a th:href="@{/test}"&gt;测试@RequestMapping的value属性--&gt;/test&lt;/a&gt;&lt;br&gt;
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n104" mdtype="fences">@RequestMapping(
+        value = {"/testRequestMapping", "/test"}
+)
+public String testRequestMapping(){
+    return "success";
+}
+</pre><h3><a name='header-n105' class='md-header-anchor '></a>4. @RequestMapping注解的method属性</h3><blockquote><p>@RequestMapping注解的method属性通过请求的请求方式（get或post）匹配请求映射</p><p>@RequestMapping注解的method属性是一个RequestMethod类型的数组，表示该请求映射能够匹配多种请求方式的请求</p><p>若当前请求的请求地址满足请求映射的value属性，但是请求方式不满足method属性，则浏览器报错405：Request method &#39;POST&#39; not supported</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n110" mdtype="fences">&lt;a th:href="@{/test}"&gt;测试@RequestMapping的value属性--&gt;/test&lt;/a&gt;&lt;br&gt;
+&lt;form th:action="@{/test}" method="post"&gt;
+    &lt;input type="submit"&gt;
+&lt;/form&gt;
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n111" mdtype="fences">@RequestMapping(
+        value = {"/testRequestMapping", "/test"},
+        method = {RequestMethod.GET, RequestMethod.POST}
+)
+public String testRequestMapping(){
+    return "success";
+}
+</pre><blockquote><p>注：</p><p>1、对于处理指定请求方式的控制器方法，SpringMVC中提供了@RequestMapping的派生注解</p><p>处理get请求的映射--&gt;@GetMapping</p><p>处理post请求的映射--&gt;@PostMapping</p><p>处理put请求的映射--&gt;@PutMapping</p><p>处理delete请求的映射--&gt;@DeleteMapping</p><p>2、常用的请求方式有get，post，put，delete</p><p>但是目前浏览器只支持get和post，若在form表单提交时，为method设置了其他请求方式的字符串（put或delete），则按照默认的请求方式get处理</p><p>若要发送put和delete请求，则需要通过spring提供的过滤器HiddenHttpMethodFilter，在RESTful部分会讲到</p></blockquote><h3><a name='header-n122' class='md-header-anchor '></a>5. @RequestMapping注解的params属性（了解）</h3><blockquote><p>@RequestMapping注解的params属性通过请求的请求参数匹配请求映射</p><p>@RequestMapping注解的params属性是一个字符串类型的数组，可以通过四种表达式设置请求参数和请求映射的匹配关系</p><p>&quot;param&quot;：要求请求映射所匹配的请求必须携带param请求参数</p><p>&quot;!param&quot;：要求请求映射所匹配的请求必须不能携带param请求参数</p><p>&quot;param=value&quot;：要求请求映射所匹配的请求必须携带param请求参数且param=value</p><p>&quot;param!=value&quot;：要求请求映射所匹配的请求必须携带param请求参数但是param!=value</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n130" mdtype="fences">&lt;a th:href="@{/test(username='admin',password=123456)"&gt;测试@RequestMapping的params属性--&gt;/test&lt;/a&gt;&lt;br&gt;
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n131" mdtype="fences">@RequestMapping(
+        value = {"/testRequestMapping", "/test"}
+        ,method = {RequestMethod.GET, RequestMethod.POST}
+        ,params = {"username","password!=123456"}
+)
+public String testRequestMapping(){
+    return "success";
+}
+</pre><blockquote><p>注：</p><p>若当前请求满足@RequestMapping注解的value和method属性，但是不满足params属性，此时页面回报错400：Parameter conditions &quot;username, password!=123456&quot; not met for actual request parameters: username={admin}, password={123456}</p></blockquote><h3><a name='header-n135' class='md-header-anchor '></a>6. @RequestMapping注解的headers属性（了解）</h3><blockquote><p>@RequestMapping注解的headers属性通过请求的请求头信息匹配请求映射</p><p>@RequestMapping注解的headers属性是一个字符串类型的数组，可以通过四种表达式设置请求头信息和请求映射的匹配关系</p><p>&quot;header&quot;：要求请求映射所匹配的请求必须携带header请求头信息</p><p>&quot;!header&quot;：要求请求映射所匹配的请求必须不能携带header请求头信息</p><p>&quot;header=value&quot;：要求请求映射所匹配的请求必须携带header请求头信息且header=value</p><p>&quot;header!=value&quot;：要求请求映射所匹配的请求必须携带header请求头信息且header!=value</p><p>若当前请求满足@RequestMapping注解的value和method属性，但是不满足headers属性，此时页面显示404错误，即资源未找到</p></blockquote><h3><a name='header-n144' class='md-header-anchor '></a>7. SpringMVC支持ant风格的路径</h3><blockquote><p>？：表示任意的单个字符</p><p>*：表示任意的0个或多个字符</p><p>**：表示任意的一层或多层目录</p><p>注意：在使用**时，只能使用/**/xxx的方式</p></blockquote><h3><a name='header-n150' class='md-header-anchor '></a>8. SpringMVC支持路径中的占位符（重点）</h3><blockquote><p>原始方式：/deleteUser?id=1</p><p>rest方式：/deleteUser/1</p><p>SpringMVC路径中的占位符常用于RESTful风格中，当请求路径中将某些数据通过路径的方式传输到服务器中，就可以在相应的@RequestMapping注解的value属性中通过占位符{xxx}表示传输的数据，在通过@PathVariable注解，将占位符所表示的数据赋值给控制器方法的形参</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n155" mdtype="fences">&lt;a th:href="@{/testRest/1/admin}"&gt;测试路径中的占位符--&gt;/testRest&lt;/a&gt;&lt;br&gt;
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n156" mdtype="fences">@RequestMapping("/testRest/{id}/{username}")
+public String testRest(@PathVariable("id") String id, @PathVariable("username") String username){
+    System.out.println("id:"+id+",username:"+username);
+    return "success";
+}
+//最终输出的内容为--&gt;id:1,username:admin
+</pre><h1><a name='header-n157' class='md-header-anchor '></a>四、SpringMVC获取请求参数</h1><h3><a name='header-n158' class='md-header-anchor '></a>1. 通过ServletAPI获取</h3><p>将HttpServletRequest作为控制器方法的形参，此时HttpServletRequest类型的参数表示封装了当前请求的请求报文的对象</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n160" mdtype="fences">@RequestMapping("/testParam")
+public String testParam(HttpServletRequest request){
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
+    System.out.println("username:"+username+",password:"+password);
+    return "success";
+}
+</pre><h3><a name='header-n161' class='md-header-anchor '></a>2. 通过控制器方法的形参获取请求参数</h3><p>在控制器方法的形参位置，设置和请求参数同名的形参，当浏览器发送请求，匹配到请求映射时，在DispatcherServlet中就会将请求参数赋值给相应的形参</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n163" mdtype="fences">&lt;a th:href="@{/testParam(username='admin',password=123456)}"&gt;测试获取请求参数--&gt;/testParam&lt;/a&gt;&lt;br&gt;
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n164" mdtype="fences">@RequestMapping("/testParam")
+public String testParam(String username, String password){
+    System.out.println("username:"+username+",password:"+password);
+    return "success";
+}
+</pre><blockquote><p>注：</p><p>若请求所传输的请求参数中有多个同名的请求参数，此时可以在控制器方法的形参中设置字符串数组或者字符串类型的形参接收此请求参数</p><p>若使用字符串数组类型的形参，此参数的数组中包含了每一个数据</p><p>若使用字符串类型的形参，此参数的值为每个数据中间使用逗号拼接的结果</p></blockquote><h3><a name='header-n170' class='md-header-anchor '></a>3. @RequestParam</h3><blockquote><p>@RequestParam是将请求参数和控制器方法的形参创建映射关系</p><p>@RequestParam注解一共有三个属性：</p><p>value：指定为形参赋值的请求参数的参数名</p><p>required：设置是否必须传输此请求参数，默认值为true</p><p>若设置为true时，则当前请求必须传输value所指定的请求参数，若没有传输该请求参数，且没有设置defaultValue属性，则页面报错400：Required String parameter &#39;xxx&#39; is not present；若设置为false，则当前请求不是必须传输value所指定的请求参数，若没有传输，则注解所标识的形参的值为null</p><p>defaultValue：不管required属性值为true或false，当value所指定的请求参数没有传输或传输的值为&quot;&quot;时，则使用默认值为形参赋值</p></blockquote><h3><a name='header-n178' class='md-header-anchor '></a>4. @RequestHeader</h3><blockquote><p>@RequestHeader是将请求头信息和控制器方法的形参创建映射关系</p><p>@RequestHeader注解一共有三个属性：value、required、defaultValue，用法同@RequestParam</p></blockquote><h3><a name='header-n182' class='md-header-anchor '></a>5. @CookieValue</h3><blockquote><p>@CookieValue是将cookie数据和控制器方法的形参创建映射关系</p><p>@CookieValue注解一共有三个属性：value、required、defaultValue，用法同@RequestParam</p></blockquote><h3><a name='header-n186' class='md-header-anchor '></a>6. 通过POJO获取请求参数</h3><p>可以在控制器方法的形参位置设置一个实体类类型的形参，此时若浏览器传输的请求参数的参数名和实体类中的属性名一致，那么请求参数就会为此属性赋值</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n188" mdtype="fences">&lt;form th:action="@{/testpojo}" method="post"&gt;
+    用户名：&lt;input type="text" name="username"&gt;&lt;br&gt;
+    密码：&lt;input type="password" name="password"&gt;&lt;br&gt;
+    性别：&lt;input type="radio" name="sex" value="男"&gt;男&lt;input type="radio" name="sex" value="女"&gt;女&lt;br&gt;
+    年龄：&lt;input type="text" name="age"&gt;&lt;br&gt;
+    邮箱：&lt;input type="text" name="email"&gt;&lt;br&gt;
+    &lt;input type="submit"&gt;
+&lt;/form&gt;
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n189" mdtype="fences">@RequestMapping("/testpojo")
+public String testPOJO(User user){
+    System.out.println(user);
+    return "success";
+}
+//最终结果--&gt;User{id=null, username='张三', password='123', age=23, sex='男', email='123@qq.com'}
+</pre><h3><a name='header-n190' class='md-header-anchor '></a>7. 解决获取请求参数的乱码问题</h3><p>解决获取请求参数的乱码问题，可以使用SpringMVC提供的编码过滤器CharacterEncodingFilter，但是必须在web.xml中进行注册</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n192" mdtype="fences" style="break-inside: unset;">&lt;!--配置springMVC的编码过滤器--&gt;
+&lt;filter&gt;
+    &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;encoding&lt;/param-name&gt;
+        &lt;param-value&gt;UTF-8&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;forceResponseEncoding&lt;/param-name&gt;
+        &lt;param-value&gt;true&lt;/param-value&gt;
+    &lt;/init-param&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</pre><blockquote><p>注：</p><p>SpringMVC中处理编码的过滤器一定要配置到其他过滤器之前，否则无效</p></blockquote><h1><a name='header-n196' class='md-header-anchor '></a>五、域对象共享数据</h1><h3><a name='header-n197' class='md-header-anchor '></a>1. 使用ServletAPI向request域对象共享数据</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n198" mdtype="fences">@RequestMapping("/testServletAPI")
+public String testServletAPI(HttpServletRequest request){
+    request.setAttribute("testScope", "hello,servletAPI");
+    return "success";
+}
+</pre><h3><a name='header-n199' class='md-header-anchor '></a>2. 使用ModelAndView向request域对象共享数据</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n200" mdtype="fences" style="break-inside: unset;">@RequestMapping("/testModelAndView")
+public ModelAndView testModelAndView(){
+    /**
+     * ModelAndView有Model和View的功能
+     * Model主要用于向请求域共享数据
+     * View主要用于设置视图，实现页面跳转
+     */
+    ModelAndView mav = new ModelAndView();
+    //向请求域共享数据
+    mav.addObject("testScope", "hello,ModelAndView");
+    //设置视图，实现页面跳转
+    mav.setViewName("success");
+    return mav;
+}
+</pre><h3><a name='header-n201' class='md-header-anchor '></a>3. 使用Model向request域对象共享数据</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n202" mdtype="fences">@RequestMapping("/testModel")
+public String testModel(Model model){
+    model.addAttribute("testScope", "hello,Model");
+    return "success";
+}
+</pre><h3><a name='header-n203' class='md-header-anchor '></a>4. 使用map向request域对象共享数据</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n204" mdtype="fences">@RequestMapping("/testMap")
+public String testMap(Map&lt;String, Object&gt; map){
+    map.put("testScope", "hello,Map");
+    return "success";
+}
+</pre><h3><a name='header-n205' class='md-header-anchor '></a>5. 使用ModelMap向request域对象共享数据</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n206" mdtype="fences">@RequestMapping("/testModelMap")
+public String testModelMap(ModelMap modelMap){
+    modelMap.addAttribute("testScope", "hello,ModelMap");
+    return "success";
+}
+</pre><h3><a name='header-n207' class='md-header-anchor '></a>6. Model、ModelMap、Map的关系</h3><p>Model、ModelMap、Map类型的参数其实本质上都是 BindingAwareModelMap 类型的</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n209" mdtype="fences">public interface Model{}
+public class ModelMap extends LinkedHashMap&lt;String, Object&gt; {}
+public class ExtendedModelMap extends ModelMap implements Model {}
+public class BindingAwareModelMap extends ExtendedModelMap {}
+</pre><h3><a name='header-n210' class='md-header-anchor '></a>7. 向session域共享数据</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n211" mdtype="fences">@RequestMapping("/testSession")
+public String testSession(HttpSession session){
+    session.setAttribute("testSessionScope", "hello,session");
+    return "success";
+}
+</pre><h3><a name='header-n212' class='md-header-anchor '></a>8. 向application域共享数据</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n213" mdtype="fences">@RequestMapping("/testApplication")
+public String testApplication(HttpSession session){
+	ServletContext application = session.getServletContext();
+    application.setAttribute("testApplicationScope", "hello,application");
+    return "success";
+}
+</pre><h1><a name='header-n214' class='md-header-anchor '></a>六、SpringMVC的视图</h1><blockquote><p>SpringMVC中的视图是View接口，视图的作用渲染数据，将模型Model中的数据展示给用户</p><p>SpringMVC视图的种类很多，默认有转发视图和重定向视图</p><p>当工程引入jstl的依赖，转发视图会自动转换为JstlView</p><p>若使用的视图技术为Thymeleaf，在SpringMVC的配置文件中配置了Thymeleaf的视图解析器，由此视图解析器解析之后所得到的是ThymeleafView</p></blockquote><h3><a name='header-n220' class='md-header-anchor '></a>1. ThymeleafView</h3><p>当控制器方法中所设置的视图名称没有任何前缀时，此时的视图名称会被SpringMVC配置文件中所配置的视图解析器解析，视图名称拼接视图前缀和视图后缀所得到的最终路径，会通过转发的方式实现跳转</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n222" mdtype="fences">@RequestMapping("/testHello")
+public String testHello(){
+    return "hello";
+}
+</pre><p><img src='img/img002.png' alt='' referrerPolicy='no-referrer' /></p><h3><a name='header-n224' class='md-header-anchor '></a>2. 转发视图</h3><blockquote><p>SpringMVC中默认的转发视图是InternalResourceView</p><p>SpringMVC中创建转发视图的情况：</p><p>当控制器方法中所设置的视图名称以&quot;forward:&quot;为前缀时，创建InternalResourceView视图，此时的视图名称不会被SpringMVC配置文件中所配置的视图解析器解析，而是会将前缀&quot;forward:&quot;去掉，剩余部分作为最终路径通过转发的方式实现跳转</p></blockquote><p>例如&quot;forward:/&quot;，&quot;forward:/employee&quot;</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n230" mdtype="fences">@RequestMapping("/testForward")
+public String testForward(){
+    return "forward:/testHello";
+}
+</pre><p><img src='img/img003.png' alt='image-20210706201316593' referrerPolicy='no-referrer' /></p><h3><a name='header-n232' class='md-header-anchor '></a>3. 重定向视图</h3><blockquote><p>SpringMVC中默认的重定向视图是RedirectView</p><p>当控制器方法中所设置的视图名称以&quot;redirect:&quot;为前缀时，创建RedirectView视图，此时的视图名称不会被SpringMVC配置文件中所配置的视图解析器解析，而是会将前缀&quot;redirect:&quot;去掉，剩余部分作为最终路径通过重定向的方式实现跳转</p></blockquote><p>例如&quot;redirect:/&quot;，&quot;redirect:/employee&quot;</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n237" mdtype="fences">@RequestMapping("/testRedirect")
+public String testRedirect(){
+    return "redirect:/testHello";
+}
+</pre><p><img src='img/img004.png' alt='image-20210706201602267' referrerPolicy='no-referrer' /></p><blockquote><p>注：</p><p>重定向视图在解析时，会先将redirect:前缀去掉，然后会判断剩余部分是否以/开头，若是则会自动拼接上下文路径</p></blockquote><h3><a name='header-n242' class='md-header-anchor '></a>4. 视图控制器view-controller</h3><p>当控制器方法中，仅仅用来实现页面跳转，即只需要设置视图名称时，可以将处理器方法使用view-controller标签进行表示</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n244" mdtype="fences">&lt;!--
+	path：设置处理的请求地址
+	view-name：设置请求地址所对应的视图名称
+--&gt;
+&lt;mvc:view-controller path="/testView" view-name="success"&gt;&lt;/mvc:view-controller&gt;
+</pre><blockquote><p>注：</p><p>当SpringMVC中设置任何一个view-controller时，其他控制器中的请求映射将全部失效，此时需要在SpringMVC的核心配置文件中设置开启mvc注解驱动的标签：</p><p>&lt;mvc:annotation-driven /&gt;</p></blockquote><h1><a name='header-n249' class='md-header-anchor '></a>七、RESTful</h1><h3><a name='header-n250' class='md-header-anchor '></a>1. RESTful简介</h3><blockquote><p>REST：<strong>Re</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer，表现层资源状态转移。</p></blockquote><h4><a name='header-n253' class='md-header-anchor '></a>1.1 资源</h4><blockquote><p>资源是一种看待服务器的方式，即，将服务器看作是由很多离散的资源组成。每个资源是服务器上一个可命名的抽象概念。因为资源是一个抽象的概念，所以它不仅仅能代表服务器文件系统中的一个文件、数据库中的一张表等等具体的东西，可以将资源设计的要多抽象有多抽象，只要想象力允许而且客户端应用开发者能够理解。与面向对象设计类似，资源是以名词为核心来组织的，首先关注的是名词。一个资源可以由一个或多个URI来标识。URI既是资源的名称，也是资源在Web上的地址。对某个资源感兴趣的客户端应用，可以通过资源的URI与其进行交互。</p></blockquote><h4><a name='header-n256' class='md-header-anchor '></a>1.2 资源的表述</h4><blockquote><p>资源的表述是一段对于资源在某个特定时刻的状态的描述。可以在客户端-服务器端之间转移（交换）。资源的表述可以有多种格式，例如HTML/XML/JSON/纯文本/图片/视频/音频等等。资源的表述格式可以通过协商机制来确定。请求-响应方向的表述通常使用不同的格式。</p></blockquote><h4><a name='header-n259' class='md-header-anchor '></a>1.3 状态转移</h4><blockquote><p>状态转移说的是：在客户端和服务器端之间转移（transfer）代表资源状态的表述。通过转移和操作资源的表述，来间接实现操作资源的目的。</p></blockquote><h3><a name='header-n262' class='md-header-anchor '></a>2. RESTful的实现</h3><blockquote><p>具体说，就是 HTTP 协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。</p><p>它们分别对应四种基本操作：GET 用来获取资源，POST 用来新建资源，PUT 用来更新资源，DELETE 用来删除资源。</p><p>REST 风格提倡 URL 地址使用统一的风格设计，从前到后各个单词使用斜杠分开，不使用问号键值对方式携带请求参数，而是将要发送给服务器的数据作为 URL 地址的一部分，以保证整体风格的一致性。</p></blockquote><figure><table><thead><tr><th>操作</th><th>传统方式</th><th>REST风格</th></tr></thead><tbody><tr><td>查询操作</td><td>getUserById?id=1</td><td>user/1--&gt;get请求方式</td></tr><tr><td>保存操作</td><td>saveUser</td><td>user--&gt;post请求方式</td></tr><tr><td>删除操作</td><td>deleteUser?id=1</td><td>user/1--&gt;delete请求方式</td></tr><tr><td>更新操作</td><td>updateUser</td><td>user--&gt;put请求方式</td></tr></tbody></table></figure><h3><a name='header-n288' class='md-header-anchor '></a>3. HiddenHttpMethodFilter</h3><blockquote><p>由于浏览器只支持发送get和post方式的请求，那么该如何发送put和delete请求呢？</p><p>SpringMVC 提供了 <strong>HiddenHttpMethodFilter</strong> 帮助我们<strong>将 POST 请求转换为 DELETE 或 PUT 请求</strong></p><p><strong>HiddenHttpMethodFilter</strong> 处理put和delete请求的条件：</p><p>a&gt;当前请求的请求方式必须为post</p><p>b&gt;当前请求必须传输请求参数_method</p><p>满足以上条件，<strong>HiddenHttpMethodFilter</strong> 过滤器就会将当前请求的请求方式转换为请求参数_method的值，因此请求参数_method的值才是最终的请求方式</p></blockquote><p>在web.xml中注册<strong>HiddenHttpMethodFilter</strong> </p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n297" mdtype="fences">&lt;filter&gt;
+    &lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.HiddenHttpMethodFilter&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</pre><blockquote><p>注：</p><p>目前为止，SpringMVC中提供了两个过滤器：CharacterEncodingFilter和HiddenHttpMethodFilter</p><p>在web.xml中注册时，必须先注册CharacterEncodingFilter，再注册HiddenHttpMethodFilter</p><p>原因：</p><ul><li><p>在 CharacterEncodingFilter 中通过 request.setCharacterEncoding(encoding) 方法设置字符集的</p></li><li><p>request.setCharacterEncoding(encoding) 方法要求前面不能有任何获取请求参数的操作</p></li><li><p>而 HiddenHttpMethodFilter 恰恰有一个获取请求方式的操作：</p></li><li><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n312" mdtype="fences">String paramValue = request.getParameter(this.methodParam);
+</pre></li></ul><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n311" mdtype="fences"><br></pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n313" mdtype="fences"><br></pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n314" mdtype="fences"><br></pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n315" mdtype="fences"><br></pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n316" mdtype="fences"><br></pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n317" mdtype="fences"><br></pre></blockquote><p>&nbsp;</p><h1><a name='header-n319' class='md-header-anchor '></a>八、RESTful案例</h1><h3><a name='header-n320' class='md-header-anchor '></a>1. 准备工作</h3><p>和传统 CRUD 一样，实现对员工信息的增删改查。</p><ul><li><p>搭建环境</p></li><li><p>准备实体类</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n327" mdtype="fences" style="break-inside: unset;">package com.atguigu.mvc.bean;
+
+public class Employee {
+
+   private Integer id;
+   private String lastName;
+
+   private String email;
+   //1 male, 0 female
+   private Integer gender;
+   
+   public Integer getId() {
+      return id;
+   }
+
+   public void setId(Integer id) {
+      this.id = id;
+   }
+
+   public String getLastName() {
+      return lastName;
+   }
+
+   public void setLastName(String lastName) {
+      this.lastName = lastName;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+   public Integer getGender() {
+      return gender;
+   }
+
+   public void setGender(Integer gender) {
+      this.gender = gender;
+   }
+
+   public Employee(Integer id, String lastName, String email, Integer gender) {
+      super();
+      this.id = id;
+      this.lastName = lastName;
+      this.email = email;
+      this.gender = gender;
+   }
+
+   public Employee() {
+   }
+}
+</pre></li><li><p>准备dao模拟数据</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n330" mdtype="fences" style="break-inside: unset;">package com.atguigu.mvc.dao;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.atguigu.mvc.bean.Employee;
+import org.springframework.stereotype.Repository;
+
+
+@Repository
+public class EmployeeDao {
+
+   private static Map&lt;Integer, Employee&gt; employees = null;
+   
+   static{
+      employees = new HashMap&lt;Integer, Employee&gt;();
+
+      employees.put(1001, new Employee(1001, "E-AA", "aa@163.com", 1));
+      employees.put(1002, new Employee(1002, "E-BB", "bb@163.com", 1));
+      employees.put(1003, new Employee(1003, "E-CC", "cc@163.com", 0));
+      employees.put(1004, new Employee(1004, "E-DD", "dd@163.com", 0));
+      employees.put(1005, new Employee(1005, "E-EE", "ee@163.com", 1));
+   }
+   
+   private static Integer initId = 1006;
+   
+   public void save(Employee employee){
+      if(employee.getId() == null){
+         employee.setId(initId++);
+      }
+      employees.put(employee.getId(), employee);
+   }
+   
+   public Collection&lt;Employee&gt; getAll(){
+      return employees.values();
+   }
+   
+   public Employee get(Integer id){
+      return employees.get(id);
+   }
+   
+   public void delete(Integer id){
+      employees.remove(id);
+   }
+}
+</pre></li></ul><h3><a name='header-n331' class='md-header-anchor '></a>2. 功能清单</h3><figure><table><thead><tr><th>功能</th><th>URL 地址</th><th>请求方式</th></tr></thead><tbody><tr><td>访问首页√</td><td>/</td><td>GET</td></tr><tr><td>查询全部数据√</td><td>/employee</td><td>GET</td></tr><tr><td>删除√</td><td>/employee/2</td><td>DELETE</td></tr><tr><td>跳转到添加数据页面√</td><td>/toAdd</td><td>GET</td></tr><tr><td>执行保存√</td><td>/employee</td><td>POST</td></tr><tr><td>跳转到更新数据页面√</td><td>/employee/2</td><td>GET</td></tr><tr><td>执行更新√</td><td>/employee</td><td>PUT</td></tr></tbody></table></figure><h3><a name='header-n365' class='md-header-anchor '></a>3. 具体功能：访问首页</h3><h5><a name='header-n366' class='md-header-anchor '></a>a&gt;配置view-controller</h5><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n367" mdtype="fences">&lt;mvc:view-controller path="/" view-name="index"/&gt;
+</pre><h5><a name='header-n368' class='md-header-anchor '></a>b&gt;创建页面</h5><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n369" mdtype="fences">&lt;!DOCTYPE html&gt;
+&lt;html lang="en" xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8" &gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;首页&lt;/h1&gt;
+&lt;a th:href="@{/employee}"&gt;访问员工信息&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><h3><a name='header-n370' class='md-header-anchor '></a>4. 具体功能：查询所有员工数据</h3><h4><a name='header-n371' class='md-header-anchor '></a>4.1 控制器方法</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n372" mdtype="fences">@RequestMapping(value = "/employee", method = RequestMethod.GET)
+public String getEmployeeList(Model model){
+    Collection&lt;Employee&gt; employeeList = employeeDao.getAll();
+    model.addAttribute("employeeList", employeeList);
+    return "employee_list";
+}
+</pre><h4><a name='header-n373' class='md-header-anchor '></a>4.2 创建employee_list.html</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n374" mdtype="fences" style="break-inside: unset;">&lt;!DOCTYPE html&gt;
+&lt;html lang="en" xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Employee Info&lt;/title&gt;
+    &lt;script type="text/javascript" th:src="@{/static/js/vue.js}"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;table border="1" cellpadding="0" cellspacing="0" style="text-align: center;" id="dataTable"&gt;
+        &lt;tr&gt;
+            &lt;th colspan="5"&gt;Employee Info&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th&gt;id&lt;/th&gt;
+            &lt;th&gt;lastName&lt;/th&gt;
+            &lt;th&gt;email&lt;/th&gt;
+            &lt;th&gt;gender&lt;/th&gt;
+            &lt;th&gt;options(&lt;a th:href="@{/toAdd}"&gt;add&lt;/a&gt;)&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr th:each="employee : ${employeeList}"&gt;
+            &lt;td th:text="${employee.id}"&gt;&lt;/td&gt;
+            &lt;td th:text="${employee.lastName}"&gt;&lt;/td&gt;
+            &lt;td th:text="${employee.email}"&gt;&lt;/td&gt;
+            &lt;td th:text="${employee.gender}"&gt;&lt;/td&gt;
+            &lt;td&gt;
+                &lt;a class="deleteA" @click="deleteEmployee" th:href="@{'/employee/'+${employee.id}}"&gt;delete&lt;/a&gt;
+                &lt;a th:href="@{'/employee/'+${employee.id}}"&gt;update&lt;/a&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><h3><a name='header-n375' class='md-header-anchor '></a>5. 具体功能：删除</h3><h4><a name='header-n376' class='md-header-anchor '></a>5.1 创建处理delete请求方式的表单</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n377" mdtype="fences">&lt;!-- 作用：通过超链接控制表单的提交，将post请求转换为delete请求 --&gt;
+&lt;form id="delete_form" method="post"&gt;
+    &lt;!-- HiddenHttpMethodFilter要求：必须传输_method请求参数，并且值为最终的请求方式 --&gt;
+    &lt;input type="hidden" name="_method" value="delete"/&gt;
+&lt;/form&gt;
+</pre><h5><a name='header-n378' class='md-header-anchor '></a>5.2 删除超链接绑定点击事件</h5><p>引入vue.js</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n380" mdtype="fences">&lt;script type="text/javascript" th:src="@{/static/js/vue.js}"&gt;&lt;/script&gt;
+</pre><p>删除超链接</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n382" mdtype="fences">&lt;a class="deleteA" @click="deleteEmployee" th:href="@{'/employee/'+${employee.id}}"&gt;delete&lt;/a&gt;
+</pre><p>通过vue处理点击事件</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n384" mdtype="fences" style="break-inside: unset;">&lt;script type="text/javascript"&gt;
+    var vue = new Vue({
+        el:"#dataTable",
+        methods:{
+            //event表示当前事件
+            deleteEmployee:function (event) {
+                //通过id获取表单标签
+                var delete_form = document.getElementById("delete_form");
+                //将触发事件的超链接的href属性为表单的action属性赋值
+                delete_form.action = event.target.href;
+                //提交表单
+                delete_form.submit();
+                //阻止超链接的默认跳转行为
+                event.preventDefault();
+            }
+        }
+    });
+&lt;/script&gt;
+</pre><h4><a name='header-n385' class='md-header-anchor '></a>5.3 控制器方法</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n386" mdtype="fences">@RequestMapping(value = "/employee/{id}", method = RequestMethod.DELETE)
+public String deleteEmployee(@PathVariable("id") Integer id){
+    employeeDao.delete(id);
+    return "redirect:/employee";
+}
+</pre><h3><a name='header-n387' class='md-header-anchor '></a>6. 具体功能：跳转到添加数据页面</h3><h4><a name='header-n388' class='md-header-anchor '></a>6.1 配置view-controller</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n389" mdtype="fences">&lt;mvc:view-controller path="/toAdd" view-name="employee_add"&gt;&lt;/mvc:view-controller&gt;
+</pre><h4><a name='header-n390' class='md-header-anchor '></a>6.2 创建employee_add.html</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n391" mdtype="fences" style="break-inside: unset;">&lt;!DOCTYPE html&gt;
+&lt;html lang="en" xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Add Employee&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;form th:action="@{/employee}" method="post"&gt;
+    lastName:&lt;input type="text" name="lastName"&gt;&lt;br&gt;
+    email:&lt;input type="text" name="email"&gt;&lt;br&gt;
+    gender:&lt;input type="radio" name="gender" value="1"&gt;male
+    &lt;input type="radio" name="gender" value="0"&gt;female&lt;br&gt;
+    &lt;input type="submit" value="add"&gt;&lt;br&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><h3><a name='header-n392' class='md-header-anchor '></a>7. 具体功能：执行保存</h3><h4><a name='header-n393' class='md-header-anchor '></a>7.1 控制器方法</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n394" mdtype="fences">@RequestMapping(value = "/employee", method = RequestMethod.POST)
+public String addEmployee(Employee employee){
+    employeeDao.save(employee);
+    return "redirect:/employee";
+}
+</pre><h3><a name='header-n395' class='md-header-anchor '></a>8. 具体功能：跳转到更新数据页面</h3><h4><a name='header-n396' class='md-header-anchor '></a>8.1 修改超链接</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n397" mdtype="fences">&lt;a th:href="@{'/employee/'+${employee.id}}"&gt;update&lt;/a&gt;
+</pre><h4><a name='header-n398' class='md-header-anchor '></a>8.2 控制器方法</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n399" mdtype="fences">@RequestMapping(value = "/employee/{id}", method = RequestMethod.GET)
+public String getEmployeeById(@PathVariable("id") Integer id, Model model){
+    Employee employee = employeeDao.get(id);
+    model.addAttribute("employee", employee);
+    return "employee_update";
+}
+</pre><h4><a name='header-n400' class='md-header-anchor '></a>8.3 创建employee_update.html</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n401" mdtype="fences" style="break-inside: unset;">&lt;!DOCTYPE html&gt;
+&lt;html lang="en" xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Update Employee&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;form th:action="@{/employee}" method="post"&gt;
+    &lt;input type="hidden" name="_method" value="put"&gt;
+    &lt;input type="hidden" name="id" th:value="${employee.id}"&gt;
+    lastName:&lt;input type="text" name="lastName" th:value="${employee.lastName}"&gt;&lt;br&gt;
+    email:&lt;input type="text" name="email" th:value="${employee.email}"&gt;&lt;br&gt;
+    &lt;!--
+        th:field="${employee.gender}"可用于单选框或复选框的回显
+        若单选框的value和employee.gender的值一致，则添加checked="checked"属性
+    --&gt;
+    gender:&lt;input type="radio" name="gender" value="1" th:field="${employee.gender}"&gt;male
+    &lt;input type="radio" name="gender" value="0" th:field="${employee.gender}"&gt;female&lt;br&gt;
+    &lt;input type="submit" value="update"&gt;&lt;br&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre><h3><a name='header-n402' class='md-header-anchor '></a>9. 具体功能：执行更新</h3><h4><a name='header-n403' class='md-header-anchor '></a>9.1 控制器方法</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n404" mdtype="fences">@RequestMapping(value = "/employee", method = RequestMethod.PUT)
+public String updateEmployee(Employee employee){
+    employeeDao.save(employee);
+    return "redirect:/employee";
+}
+</pre><h1><a name='header-n405' class='md-header-anchor '></a>九、HttpMessageConverter</h1><blockquote><p>HttpMessageConverter，报文信息转换器，将请求报文转换为Java对象，或将Java对象转换为响应报文</p><p>HttpMessageConverter提供了两个注解和两个类型：@RequestBody，@ResponseBody，RequestEntity，ResponseEntity</p></blockquote><h3><a name='header-n409' class='md-header-anchor '></a>1. @RequestBody</h3><p>@RequestBody可以获取请求体，需要在控制器方法设置一个形参，使用@RequestBody进行标识，当前请求的请求体就会为当前注解所标识的形参赋值</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n411" mdtype="fences">&lt;form th:action="@{/testRequestBody}" method="post"&gt;
+    用户名：&lt;input type="text" name="username"&gt;&lt;br&gt;
+    密码：&lt;input type="password" name="password"&gt;&lt;br&gt;
+    &lt;input type="submit"&gt;
+&lt;/form&gt;
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n412" mdtype="fences">@RequestMapping("/testRequestBody")
+public String testRequestBody(@RequestBody String requestBody){
+    String decode = URLDecoder.decode(requestBody,"UTF-8");//中文解码
+    System.out.println("requestBody:"+decode);
+    return "success";
+}
+</pre><p>输出结果：</p><p>requestBody:username=admin&amp;password=123456</p><h3><a name='header-n415' class='md-header-anchor '></a>2. RequestEntity</h3><p>RequestEntity封装请求报文的一种类型，需要在控制器方法的形参中设置该类型的形参，当前请求的请求报文就会赋值给该形参，可以通过getHeaders()获取请求头信息，通过getBody()获取请求体信息</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n417" mdtype="fences">@RequestMapping("/testRequestEntity")
+public String testRequestEntity(RequestEntity&lt;String&gt; requestEntity){
+    System.out.println("requestHeader:"+requestEntity.getHeaders());
+    System.out.println("requestBody:"+requestEntity.getBody());
+    return "success";
+}
+</pre><blockquote><p>输出结果：
+requestHeader:[host:&quot;localhost:8080&quot;, connection:&quot;keep-alive&quot;, content-length:&quot;27&quot;, cache-control:&quot;max-age=0&quot;, sec-ch-ua:&quot;&quot; Not A;Brand&quot;;v=&quot;99&quot;, &quot;Chromium&quot;;v=&quot;90&quot;, &quot;Google Chrome&quot;;v=&quot;90&quot;&quot;, sec-ch-ua-mobile:&quot;?0&quot;, upgrade-insecure-requests:&quot;1&quot;, origin:&quot;<a href='http://localhost:8080' target='_blank' class='url'>http://localhost:8080</a>&quot;, user-agent:&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36&quot;]
+requestBody:username=admin&amp;password=123</p></blockquote><h3><a name='header-n420' class='md-header-anchor '></a>3. @ResponseBody</h3><p>@ResponseBody用于标识一个控制器方法，可以将该方法的返回值直接作为响应报文的响应体响应到浏览器</p><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n422" mdtype="fences">@RequestMapping("/testResponseBody")
+@ResponseBody
+public String testResponseBody(){
+    return "success";
+}
+</pre><p>结果：浏览器页面显示success</p><blockquote><ul><li><strong>乱码问题解决</strong></li></ul></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n428" mdtype="fences">&lt;!--配置注解驱动--&gt;
+&lt;mvc:annotation-driven&gt;
+    &lt;!--消息转换器，解决ResponseBody响应中文乱码--&gt;
+    &lt;mvc:message-converters&gt;
+        &lt;bean class="org.springframework.http.converter.StringHttpMessageConverter"&gt;
+            &lt;property name="supportedMediaTypes" value="text/html;charset=UTF-8"/&gt;
+            &lt;property name="defaultCharset" value="UTF-8"/&gt;
+        &lt;/bean&gt;
+    &lt;/mvc:message-converters&gt;
+&lt;/mvc:annotation-driven&gt;
+</pre><h3><a name='header-n429' class='md-header-anchor '></a>4. SpringMVC处理json</h3><p>@ResponseBody处理json的步骤：</p><blockquote><p>a&gt; 导入jackson的依赖</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n433" mdtype="fences">&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+    &lt;version&gt;2.12.1&lt;/version&gt;
+&lt;/dependency&gt;
+</pre><blockquote><p>b&gt; 在SpringMVC的核心配置文件中开启mvc的注解驱动，此时在HandlerAdaptor中会自动装配一个消息转换器：MappingJackson2HttpMessageConverter，可以将响应到浏览器的Java对象转换为Json格式的字符串</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="" contenteditable="false" cid="n436" mdtype="fences">&lt;mvc:annotation-driven /&gt;
+</pre><blockquote><p>c&gt; 在处理器方法上使用@ResponseBody注解进行标识</p></blockquote><blockquote><p>d&gt; 将Java对象直接作为控制器方法的返回值返回，就会自动转换为Json格式的字符串</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n441" mdtype="fences">@RequestMapping("/testResponseUser")
+@ResponseBody
+public User testResponseUser(){
+    return new User(1001,"admin","123456",23,"男");
+}
+</pre><blockquote><p>浏览器的页面中展示的结果：</p><p>{&quot;id&quot;:1001,&quot;username&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;123456&quot;,&quot;age&quot;:23,&quot;sex&quot;:&quot;男&quot;}</p></blockquote><h3><a name='header-n445' class='md-header-anchor '></a>5. SpringMVC处理ajax</h3><blockquote><p>a&gt; 请求超链接：</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n448" mdtype="fences">&lt;div id="app"&gt;
+	&lt;a th:href="@{/testAjax}" @click="testAjax"&gt;testAjax&lt;/a&gt;&lt;br&gt;
+&lt;/div&gt;
+</pre><blockquote><p>b&gt; 通过vue和axios处理点击事件：</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n451" mdtype="fences" style="break-inside: unset;">&lt;script type="text/javascript" th:src="@{/static/js/vue.js}"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" th:src="@{/static/js/axios.min.js}"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+    var vue = new Vue({
+        el:"#app",
+        methods:{
+            testAjax:function (event) {
+                axios({
+                    method:"post",
+                    url:event.target.href,
+                    params:{
+                        username:"admin",
+                        password:"123456"
+                    }
+                }).then(function (response) {
+                    alert(response.data);
+                });
+                event.preventDefault();
+            }
+        }
+    });
+&lt;/script&gt;
+</pre><blockquote><p>c&gt; 控制器方法：</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n454" mdtype="fences">@RequestMapping("/testAjax")
+@ResponseBody
+public String testAjax(String username, String password){
+    System.out.println("username:"+username+",password:"+password);
+    return "hello,ajax";
+}
+</pre><h3><a name='header-n455' class='md-header-anchor '></a>6. @RestController注解</h3><blockquote><p>@RestController注解是springMVC提供的一个复合注解，标识在控制器的类上，就相当于为类添加了@Controller注解，并且为其中的每个方法添加了@ResponseBody注解</p></blockquote><h3><a name='header-n458' class='md-header-anchor '></a>7. ResponseEntity</h3><blockquote><p>ResponseEntity用于控制器方法的返回值类型，该控制器方法的返回值就是响应到浏览器的响应报文</p></blockquote><h1><a name='header-n461' class='md-header-anchor '></a>十、文件上传和下载</h1><h3><a name='header-n462' class='md-header-anchor '></a>1. 文件下载</h3><blockquote><p>使用ResponseEntity实现下载文件的功能</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n465" mdtype="fences" style="break-inside: unset;">@RequestMapping("/testDown")
+public ResponseEntity&lt;byte[]&gt; testResponseEntity(HttpSession session) throws IOException {
+    //获取ServletContext对象
+    ServletContext servletContext = session.getServletContext();
+    //获取服务器中文件的真实路径
+    String realPath = servletContext.getRealPath("/static/img/1.jpg");
+    //创建输入流
+    InputStream is = new FileInputStream(realPath);
+    //创建字节数组
+    byte[] bytes = new byte[is.available()];
+    //将流读到字节数组中
+    is.read(bytes);
+    //创建HttpHeaders对象设置响应头信息
+    MultiValueMap&lt;String, String&gt; headers = new HttpHeaders();
+    //设置要下载方式以及下载文件的名字
+    headers.add("Content-Disposition", "attachment;filename=1.jpg");
+    //设置响应状态码
+    HttpStatus statusCode = HttpStatus.OK;
+    //创建ResponseEntity对象
+    ResponseEntity&lt;byte[]&gt; responseEntity = new ResponseEntity&lt;&gt;(bytes, headers, statusCode);
+    //关闭输入流
+    is.close();
+    return responseEntity;
+}
+</pre><h3><a name='header-n466' class='md-header-anchor '></a>2. 文件上传</h3><blockquote><p>文件上传要求form表单的请求方式必须为post，并且添加属性enctype=&quot;multipart/form-data&quot;</p><p>SpringMVC中将上传的文件封装到MultipartFile对象中，通过此对象可以获取文件相关信息</p><p>上传步骤：</p></blockquote><blockquote><p>a&gt; 添加依赖：</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n473" mdtype="fences">&lt;!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+    &lt;version&gt;1.3.1&lt;/version&gt;
+&lt;/dependency&gt;
+</pre><blockquote><p>b&gt; 在SpringMVC的配置文件中添加配置：</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n476" mdtype="fences">&lt;!--必须通过文件解析器的解析才能将文件转换为MultipartFile对象--&gt;
+&lt;bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"&gt;&lt;/bean&gt;
+</pre><blockquote><p>c&gt; 控制器方法：</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n479" mdtype="fences" style="break-inside: unset;">@RequestMapping("/testUp")
+public String testUp(MultipartFile photo, HttpSession session) throws IOException {
+    //获取上传的文件的文件名
+    String fileName = photo.getOriginalFilename();
+    //处理文件重名问题
+    String hzName = fileName.substring(fileName.lastIndexOf("."));
+    fileName = UUID.randomUUID().toString() + hzName;
+    //获取服务器中photo目录的路径
+    ServletContext servletContext = session.getServletContext();
+    String photoPath = servletContext.getRealPath("photo");
+    File file = new File(photoPath);
+    if(!file.exists()){
+        file.mkdir();
+    }
+    String finalPath = photoPath + File.separator + fileName;
+    //实现上传功能
+    photo.transferTo(new File(finalPath));
+    return "success";
+}
+</pre><h1><a name='header-n480' class='md-header-anchor '></a>十一、拦截器</h1><h3><a name='header-n481' class='md-header-anchor '></a>1. 拦截器的配置</h3><blockquote><p>SpringMVC中的拦截器用于拦截控制器方法的执行</p><p>SpringMVC中的拦截器需要实现HandlerInterceptor</p><p>SpringMVC的拦截器必须在SpringMVC的配置文件中进行配置：</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n486" mdtype="fences">&lt;mvc:interceptors&gt;
+    &lt;bean class="com.atguigu.interceptor.FirstInterceptor"&gt;&lt;/bean&gt;
+    &lt;ref bean="firstInterceptor"&gt;&lt;/ref&gt;
+    &lt;!-- 以上两种配置方式都是对DispatcherServlet所处理的所有的请求进行拦截 --&gt;
+    &lt;mvc:interceptor&gt;
+        &lt;mvc:mapping path="/**"/&gt;
+        &lt;mvc:exclude-mapping path="/testRequestEntity"/&gt;
+        &lt;ref bean="firstInterceptor"&gt;&lt;/ref&gt;
+    &lt;/mvc:interceptor&gt;
+    &lt;!-- 
+ 以上配置方式可以通过ref或bean标签设置拦截器，通过mvc:mapping设置需要拦截的请求，通过mvc:exclude-mapping设置需要排除的请求，即不需要拦截的请求
+--&gt;
+&lt;/mvc:interceptors&gt;
+</pre><h3><a name='header-n487' class='md-header-anchor '></a>2. 拦截器的三个抽象方法</h3><blockquote><p>SpringMVC中的拦截器有三个抽象方法：</p><p>preHandle：控制器方法执行之前执行preHandle()，其boolean类型的返回值表示是否拦截或放行，返回true为放行，即调用控制器方法；返回false表示拦截，即不调用控制器方法</p><p>postHandle：控制器方法执行之后执行postHandle()</p><p>afterComplation：处理完视图和模型数据，渲染视图完毕之后执行afterComplation()</p></blockquote><h3><a name='header-n493' class='md-header-anchor '></a>3. 多个拦截器的执行顺序</h3><blockquote><ul><li>a&gt; 若每个拦截器的preHandle()都返回true</li></ul><p>此时多个拦截器的执行顺序和拦截器在SpringMVC的配置文件的配置顺序有关：</p><p>preHandle()会按照配置的顺序执行，而postHandle()和afterComplation()会按照配置的反序执行</p><ul><li>b&gt; 若某个拦截器的preHandle()返回了false</li></ul><p>preHandle()返回false和它之前的拦截器的preHandle()都会执行，postHandle()都不执行，返回false的拦截器之前的拦截器的afterComplation()会执行</p></blockquote><h1><a name='header-n504' class='md-header-anchor '></a>十二、异常处理器</h1><h3><a name='header-n505' class='md-header-anchor '></a>1. 基于配置的异常处理</h3><blockquote><p>SpringMVC提供了一个处理控制器方法执行过程中所出现的异常的接口：HandlerExceptionResolver</p><p>HandlerExceptionResolver接口的实现类有：DefaultHandlerExceptionResolver和SimpleMappingExceptionResolver</p><p>SpringMVC提供了自定义的异常处理器SimpleMappingExceptionResolver，使用方式：</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n510" mdtype="fences" style="break-inside: unset;">&lt;bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"&gt;
+    &lt;property name="exceptionMappings"&gt;
+        &lt;props&gt;
+        	&lt;!--
+        		properties的键表示处理器方法执行过程中出现的异常
+        		properties的值表示若出现指定异常时，设置一个新的视图名称，跳转到指定页面
+        	--&gt;
+            &lt;prop key="java.lang.ArithmeticException"&gt;error&lt;/prop&gt;
+        &lt;/props&gt;
+    &lt;/property&gt;
+    &lt;!--
+    	exceptionAttribute属性设置一个属性名，将出现的异常信息在请求域中进行共享
+    --&gt;
+    &lt;property name="exceptionAttribute" value="ex"&gt;&lt;/property&gt;
+&lt;/bean&gt;
+</pre><h3><a name='header-n511' class='md-header-anchor '></a>2. 基于注解的异常处理</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n512" mdtype="fences">//@ControllerAdvice将当前类标识为异常处理的组件
+@ControllerAdvice
+public class ExceptionController {
+
+    //@ExceptionHandler用于设置所标识方法处理的异常
+    @ExceptionHandler(ArithmeticException.class)
+    //ex表示当前请求处理中出现的异常对象
+    public String handleArithmeticException(Exception ex, Model model){
+        model.addAttribute("ex", ex);
+        return "error";
+    }
+
+}
+</pre><h1><a name='header-n513' class='md-header-anchor '></a>十三、注解配置SpringMVC</h1><blockquote><p>使用配置类和注解代替web.xml和SpringMVC配置文件的功能</p></blockquote><h3><a name='header-n516' class='md-header-anchor '></a>1. 创建初始化类，代替web.xml</h3><blockquote><p>在Servlet3.0环境中，容器会在类路径中查找实现javax.servlet.ServletContainerInitializer接口的类，如果找到的话就用它来配置Servlet容器。
+Spring提供了这个接口的实现，名为SpringServletContainerInitializer，这个类反过来又会查找实现WebApplicationInitializer的类并将配置的任务交给它们来完成。Spring3.2引入了一个便利的WebApplicationInitializer基础实现，名为AbstractAnnotationConfigDispatcherServletInitializer，当我们的类扩展了AbstractAnnotationConfigDispatcherServletInitializer并将其部署到Servlet3.0容器的时候，容器会自动发现它，并用它来配置Servlet上下文。</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n519" mdtype="fences" style="break-inside: unset;">public class WebInit extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+    /**
+     * 指定spring的配置类
+     * @return
+     */
+    @Override
+    protected Class&lt;?&gt;[] getRootConfigClasses() {
+        return new Class[]{SpringConfig.class};
+    }
+
+    /**
+     * 指定SpringMVC的配置类
+     * @return
+     */
+    @Override
+    protected Class&lt;?&gt;[] getServletConfigClasses() {
+        return new Class[]{WebConfig.class};
+    }
+
+    /**
+     * 指定DispatcherServlet的映射规则，即url-pattern
+     * @return
+     */
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
+
+    /**
+     * 添加过滤器
+     * @return
+     */
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+        encodingFilter.setEncoding("UTF-8");
+        encodingFilter.setForceRequestEncoding(true);
+        HiddenHttpMethodFilter hiddenHttpMethodFilter = new HiddenHttpMethodFilter();
+        return new Filter[]{encodingFilter, hiddenHttpMethodFilter};
+    }
+}
+</pre><h3><a name='header-n520' class='md-header-anchor '></a>2. 创建SpringConfig配置类，代替spring的配置文件</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n521" mdtype="fences">@Configuration
+public class SpringConfig {
+	//ssm整合之后，spring的配置信息写在此类中
+}
+</pre><h3><a name='header-n522' class='md-header-anchor '></a>3. 创建WebConfig配置类，代替SpringMVC的配置文件</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n523" mdtype="fences" style="break-inside: unset;">@Configuration
+//扫描组件
+@ComponentScan("com.atguigu.mvc.controller")
+//开启MVC注解驱动
+@EnableWebMvc
+public class WebConfig implements WebMvcConfigurer {
+
+    //使用默认的servlet处理静态资源
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
+
+    //配置文件上传解析器
+    @Bean
+    public CommonsMultipartResolver multipartResolver(){
+        return new CommonsMultipartResolver();
+    }
+
+    //配置拦截器
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        FirstInterceptor firstInterceptor = new FirstInterceptor();
+        registry.addInterceptor(firstInterceptor).addPathPatterns("/**");
+    }
+    
+    //配置视图控制
+    
+    /*@Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("index");
+    }*/
+    
+    //配置异常映射
+    /*@Override
+    public void configureHandlerExceptionResolvers(List&lt;HandlerExceptionResolver&gt; resolvers) {
+        SimpleMappingExceptionResolver exceptionResolver = new SimpleMappingExceptionResolver();
+        Properties prop = new Properties();
+        prop.setProperty("java.lang.ArithmeticException", "error");
+        //设置异常映射
+        exceptionResolver.setExceptionMappings(prop);
+        //设置共享异常信息的键
+        exceptionResolver.setExceptionAttribute("ex");
+        resolvers.add(exceptionResolver);
+    }*/
+
+    //配置生成模板解析器
+    @Bean
+    public ITemplateResolver templateResolver() {
+        WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();
+        // ServletContextTemplateResolver需要一个ServletContext作为构造参数，可通过WebApplicationContext 的方法获得
+        ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(
+                webApplicationContext.getServletContext());
+        templateResolver.setPrefix("/WEB-INF/templates/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+        return templateResolver;
+    }
+
+    //生成模板引擎并为模板引擎注入模板解析器
+    @Bean
+    public SpringTemplateEngine templateEngine(ITemplateResolver templateResolver) {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver);
+        return templateEngine;
+    }
+
+    //生成视图解析器并未解析器注入模板引擎
+    @Bean
+    public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setCharacterEncoding("UTF-8");
+        viewResolver.setTemplateEngine(templateEngine);
+        return viewResolver;
+    }
+
+
+}
+</pre><h3><a name='header-n524' class='md-header-anchor '></a>4. 测试功能</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n525" mdtype="fences">@RequestMapping("/")
+public String index(){
+    return "index";
+}
+</pre><h1><a name='header-n526' class='md-header-anchor '></a>十四、SpringMVC执行流程</h1><h3><a name='header-n527' class='md-header-anchor '></a>1. SpringMVC常用组件</h3><blockquote><ul><li>DispatcherServlet：<strong>前端控制器</strong>，不需要工程师开发，由框架提供</li></ul><p>作用：统一处理请求和响应，整个流程控制的中心，由它调用其它组件处理用户的请求</p><ul><li>HandlerMapping：<strong>处理器映射器</strong>，不需要工程师开发，由框架提供</li></ul><p>作用：根据请求的url、method等信息查找Handler，即控制器方法</p><ul><li>Handler：<strong>处理器</strong>，需要工程师开发</li></ul><p>作用：在DispatcherServlet的控制下Handler对具体的用户请求进行处理</p><ul><li>HandlerAdapter：<strong>处理器适配器</strong>，不需要工程师开发，由框架提供</li></ul><p>作用：通过HandlerAdapter对处理器（控制器方法）进行执行</p><ul><li>ViewResolver：<strong>视图解析器</strong>，不需要工程师开发，由框架提供</li></ul><p>作用：进行视图解析，得到相应的视图，例如：ThymeleafView、InternalResourceView、RedirectView</p><ul><li>View：<strong>视图</strong></li></ul><p>作用：将模型数据通过页面展示给用户</p></blockquote><h3><a name='header-n553' class='md-header-anchor '></a>2. DispatcherServlet初始化过程</h3><blockquote><p>DispatcherServlet 本质上是一个 Servlet，所以天然的遵循 Servlet 的生命周期。所以宏观上是 Servlet 生命周期来进行调度。</p></blockquote><p><img src='img/img005.png' alt='images' referrerPolicy='no-referrer' /></p><h4><a name='header-n557' class='md-header-anchor '></a>2.1 初始化WebApplicationContext</h4><blockquote><p>所在类：org.springframework.web.servlet.FrameworkServlet</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n560" mdtype="fences" style="break-inside: unset;">protected WebApplicationContext initWebApplicationContext() {
+    WebApplicationContext rootContext =
+        WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+    WebApplicationContext wac = null;
+
+    if (this.webApplicationContext != null) {
+        // A context instance was injected at construction time -&gt; use it
+        wac = this.webApplicationContext;
+        if (wac instanceof ConfigurableWebApplicationContext) {
+            ConfigurableWebApplicationContext cwac = (ConfigurableWebApplicationContext) wac;
+            if (!cwac.isActive()) {
+                // The context has not yet been refreshed -&gt; provide services such as
+                // setting the parent context, setting the application context id, etc
+                if (cwac.getParent() == null) {
+                    // The context instance was injected without an explicit parent -&gt; set
+                    // the root application context (if any; may be null) as the parent
+                    cwac.setParent(rootContext);
+                }
+                configureAndRefreshWebApplicationContext(cwac);
+            }
+        }
+    }
+    if (wac == null) {
+        // No context instance was injected at construction time -&gt; see if one
+        // has been registered in the servlet context. If one exists, it is assumed
+        // that the parent context (if any) has already been set and that the
+        // user has performed any initialization such as setting the context id
+        wac = findWebApplicationContext();
+    }
+    if (wac == null) {
+        // No context instance is defined for this servlet -&gt; create a local one
+        // 创建WebApplicationContext
+        wac = createWebApplicationContext(rootContext);
+    }
+
+    if (!this.refreshEventReceived) {
+        // Either the context is not a ConfigurableApplicationContext with refresh
+        // support or the context injected at construction time had already been
+        // refreshed -&gt; trigger initial onRefresh manually here.
+        synchronized (this.onRefreshMonitor) {
+            // 刷新WebApplicationContext
+            onRefresh(wac);
+        }
+    }
+
+    if (this.publishContext) {
+        // Publish the context as a servlet context attribute.
+        // 将IOC容器在应用域共享
+        String attrName = getServletContextAttributeName();
+        getServletContext().setAttribute(attrName, wac);
+    }
+
+    return wac;
+}
+</pre><h4><a name='header-n561' class='md-header-anchor '></a>2.2 创建WebApplicationContext</h4><blockquote><p>所在类：org.springframework.web.servlet.FrameworkServlet</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n564" mdtype="fences" style="break-inside: unset;">protected WebApplicationContext createWebApplicationContext(@Nullable ApplicationContext parent) {
+    Class&lt;?&gt; contextClass = getContextClass();
+    if (!ConfigurableWebApplicationContext.class.isAssignableFrom(contextClass)) {
+        throw new ApplicationContextException(
+            "Fatal initialization error in servlet with name '" + getServletName() +
+            "': custom WebApplicationContext class [" + contextClass.getName() +
+            "] is not of type ConfigurableWebApplicationContext");
+    }
+    // 通过反射创建 IOC 容器对象
+    ConfigurableWebApplicationContext wac =
+        (ConfigurableWebApplicationContext) BeanUtils.instantiateClass(contextClass);
+
+    wac.setEnvironment(getEnvironment());
+    // 设置父容器
+    wac.setParent(parent);
+    String configLocation = getContextConfigLocation();
+    if (configLocation != null) {
+        wac.setConfigLocation(configLocation);
+    }
+    configureAndRefreshWebApplicationContext(wac);
+
+    return wac;
+}
+</pre><h4><a name='header-n565' class='md-header-anchor '></a>2.3 DispatcherServlet初始化策略</h4><blockquote><p>FrameworkServlet创建WebApplicationContext后，刷新容器，调用onRefresh(wac)，此方法在DispatcherServlet中进行了重写，调用了initStrategies(context)方法，初始化策略，即初始化DispatcherServlet的各个组件</p><p>所在类：org.springframework.web.servlet.DispatcherServlet</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n569" mdtype="fences">protected void initStrategies(ApplicationContext context) {
+   initMultipartResolver(context);
+   initLocaleResolver(context);
+   initThemeResolver(context);
+   initHandlerMappings(context);
+   initHandlerAdapters(context);
+   initHandlerExceptionResolvers(context);
+   initRequestToViewNameTranslator(context);
+   initViewResolvers(context);
+   initFlashMapManager(context);
+}
+</pre><h3><a name='header-n570' class='md-header-anchor '></a>3. DispatcherServlet调用组件处理请求</h3><h4><a name='header-n571' class='md-header-anchor '></a>3.1 processRequest()</h4><blockquote><p>FrameworkServlet重写HttpServlet中的service()和doXxx()，这些方法中调用了processRequest(request, response)</p><p>所在类：org.springframework.web.servlet.FrameworkServlet</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n575" mdtype="fences" style="break-inside: unset;">protected final void processRequest(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+
+    long startTime = System.currentTimeMillis();
+    Throwable failureCause = null;
+
+    LocaleContext previousLocaleContext = LocaleContextHolder.getLocaleContext();
+    LocaleContext localeContext = buildLocaleContext(request);
+
+    RequestAttributes previousAttributes = RequestContextHolder.getRequestAttributes();
+    ServletRequestAttributes requestAttributes = buildRequestAttributes(request, response, previousAttributes);
+
+    WebAsyncManager asyncManager = WebAsyncUtils.getAsyncManager(request);
+    asyncManager.registerCallableInterceptor(FrameworkServlet.class.getName(), new RequestBindingInterceptor());
+
+    initContextHolders(request, localeContext, requestAttributes);
+
+    try {
+		// 执行服务，doService()是一个抽象方法，在DispatcherServlet中进行了重写
+        doService(request, response);
+    }
+    catch (ServletException | IOException ex) {
+        failureCause = ex;
+        throw ex;
+    }
+    catch (Throwable ex) {
+        failureCause = ex;
+        throw new NestedServletException("Request processing failed", ex);
+    }
+
+    finally {
+        resetContextHolders(request, previousLocaleContext, previousAttributes);
+        if (requestAttributes != null) {
+            requestAttributes.requestCompleted();
+        }
+        logResult(request, response, failureCause, asyncManager);
+        publishRequestHandledEvent(request, response, startTime, failureCause);
+    }
+}
+</pre><h4><a name='header-n576' class='md-header-anchor '></a>3.2 doService()</h4><blockquote><p>所在类：org.springframework.web.servlet.DispatcherServlet</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n579" mdtype="fences" style="break-inside: unset;">@Override
+protected void doService(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    logRequest(request);
+
+    // Keep a snapshot of the request attributes in case of an include,
+    // to be able to restore the original attributes after the include.
+    Map&lt;String, Object&gt; attributesSnapshot = null;
+    if (WebUtils.isIncludeRequest(request)) {
+        attributesSnapshot = new HashMap&lt;&gt;();
+        Enumeration&lt;?&gt; attrNames = request.getAttributeNames();
+        while (attrNames.hasMoreElements()) {
+            String attrName = (String) attrNames.nextElement();
+            if (this.cleanupAfterInclude || attrName.startsWith(DEFAULT_STRATEGIES_PREFIX)) {
+                attributesSnapshot.put(attrName, request.getAttribute(attrName));
+            }
+        }
+    }
+
+    // Make framework objects available to handlers and view objects.
+    request.setAttribute(WEB_APPLICATION_CONTEXT_ATTRIBUTE, getWebApplicationContext());
+    request.setAttribute(LOCALE_RESOLVER_ATTRIBUTE, this.localeResolver);
+    request.setAttribute(THEME_RESOLVER_ATTRIBUTE, this.themeResolver);
+    request.setAttribute(THEME_SOURCE_ATTRIBUTE, getThemeSource());
+
+    if (this.flashMapManager != null) {
+        FlashMap inputFlashMap = this.flashMapManager.retrieveAndUpdate(request, response);
+        if (inputFlashMap != null) {
+            request.setAttribute(INPUT_FLASH_MAP_ATTRIBUTE, Collections.unmodifiableMap(inputFlashMap));
+        }
+        request.setAttribute(OUTPUT_FLASH_MAP_ATTRIBUTE, new FlashMap());
+        request.setAttribute(FLASH_MAP_MANAGER_ATTRIBUTE, this.flashMapManager);
+    }
+
+    RequestPath requestPath = null;
+    if (this.parseRequestPath &amp;&amp; !ServletRequestPathUtils.hasParsedRequestPath(request)) {
+        requestPath = ServletRequestPathUtils.parseAndCache(request);
+    }
+
+    try {
+        // 处理请求和响应
+        doDispatch(request, response);
+    }
+    finally {
+        if (!WebAsyncUtils.getAsyncManager(request).isConcurrentHandlingStarted()) {
+            // Restore the original attribute snapshot, in case of an include.
+            if (attributesSnapshot != null) {
+                restoreAttributesAfterInclude(request, attributesSnapshot);
+            }
+        }
+        if (requestPath != null) {
+            ServletRequestPathUtils.clearParsedRequestPath(request);
+        }
+    }
+}
+</pre><h4><a name='header-n580' class='md-header-anchor '></a>3.3 doDispatch()</h4><blockquote><p>所在类：org.springframework.web.servlet.DispatcherServlet</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n583" mdtype="fences" style="break-inside: unset;">protected void doDispatch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    HttpServletRequest processedRequest = request;
+    HandlerExecutionChain mappedHandler = null;
+    boolean multipartRequestParsed = false;
+
+    WebAsyncManager asyncManager = WebAsyncUtils.getAsyncManager(request);
+
+    try {
+        ModelAndView mv = null;
+        Exception dispatchException = null;
+
+        try {
+            processedRequest = checkMultipart(request);
+            multipartRequestParsed = (processedRequest != request);
+
+            // Determine handler for the current request.
+            /*
+            	mappedHandler：调用链
+                包含handler、interceptorList、interceptorIndex
+            	handler：浏览器发送的请求所匹配的控制器方法
+            	interceptorList：处理控制器方法的所有拦截器集合
+            	interceptorIndex：拦截器索引，控制拦截器afterCompletion()的执行
+            */
+            mappedHandler = getHandler(processedRequest);
+            if (mappedHandler == null) {
+                noHandlerFound(processedRequest, response);
+                return;
+            }
+
+            // Determine handler adapter for the current request.
+           	// 通过控制器方法创建相应的处理器适配器，调用所对应的控制器方法
+            HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());
+
+            // Process last-modified header, if supported by the handler.
+            String method = request.getMethod();
+            boolean isGet = "GET".equals(method);
+            if (isGet || "HEAD".equals(method)) {
+                long lastModified = ha.getLastModified(request, mappedHandler.getHandler());
+                if (new ServletWebRequest(request, response).checkNotModified(lastModified) &amp;&amp; isGet) {
+                    return;
+                }
+            }
+			
+            // 调用拦截器的preHandle()
+            if (!mappedHandler.applyPreHandle(processedRequest, response)) {
+                return;
+            }
+
+            // Actually invoke the handler.
+            // 由处理器适配器调用具体的控制器方法，最终获得ModelAndView对象
+            mv = ha.handle(processedRequest, response, mappedHandler.getHandler());
+
+            if (asyncManager.isConcurrentHandlingStarted()) {
+                return;
+            }
+
+            applyDefaultViewName(processedRequest, mv);
+            // 调用拦截器的postHandle()
+            mappedHandler.applyPostHandle(processedRequest, response, mv);
+        }
+        catch (Exception ex) {
+            dispatchException = ex;
+        }
+        catch (Throwable err) {
+            // As of 4.3, we're processing Errors thrown from handler methods as well,
+            // making them available for @ExceptionHandler methods and other scenarios.
+            dispatchException = new NestedServletException("Handler dispatch failed", err);
+        }
+        // 后续处理：处理模型数据和渲染视图
+        processDispatchResult(processedRequest, response, mappedHandler, mv, dispatchException);
+    }
+    catch (Exception ex) {
+        triggerAfterCompletion(processedRequest, response, mappedHandler, ex);
+    }
+    catch (Throwable err) {
+        triggerAfterCompletion(processedRequest, response, mappedHandler,
+                               new NestedServletException("Handler processing failed", err));
+    }
+    finally {
+        if (asyncManager.isConcurrentHandlingStarted()) {
+            // Instead of postHandle and afterCompletion
+            if (mappedHandler != null) {
+                mappedHandler.applyAfterConcurrentHandlingStarted(processedRequest, response);
+            }
+        }
+        else {
+            // Clean up any resources used by a multipart request.
+            if (multipartRequestParsed) {
+                cleanupMultipart(processedRequest);
+            }
+        }
+    }
+}
+</pre><h4><a name='header-n584' class='md-header-anchor '></a>3.4 processDispatchResult()</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n585" mdtype="fences" style="break-inside: unset;">private void processDispatchResult(HttpServletRequest request, HttpServletResponse response,
+                                   @Nullable HandlerExecutionChain mappedHandler, @Nullable ModelAndView mv,
+                                   @Nullable Exception exception) throws Exception {
+
+    boolean errorView = false;
+
+    if (exception != null) {
+        if (exception instanceof ModelAndViewDefiningException) {
+            logger.debug("ModelAndViewDefiningException encountered", exception);
+            mv = ((ModelAndViewDefiningException) exception).getModelAndView();
+        }
+        else {
+            Object handler = (mappedHandler != null ? mappedHandler.getHandler() : null);
+            mv = processHandlerException(request, response, handler, exception);
+            errorView = (mv != null);
+        }
+    }
+
+    // Did the handler return a view to render?
+    if (mv != null &amp;&amp; !mv.wasCleared()) {
+        // 处理模型数据和渲染视图
+        render(mv, request, response);
+        if (errorView) {
+            WebUtils.clearErrorRequestAttributes(request);
+        }
+    }
+    else {
+        if (logger.isTraceEnabled()) {
+            logger.trace("No view rendering, null ModelAndView returned.");
+        }
+    }
+
+    if (WebAsyncUtils.getAsyncManager(request).isConcurrentHandlingStarted()) {
+        // Concurrent handling started during a forward
+        return;
+    }
+
+    if (mappedHandler != null) {
+        // Exception (if any) is already handled..
+        // 调用拦截器的afterCompletion()
+        mappedHandler.triggerAfterCompletion(request, response, null);
+    }
+}
+</pre><h3><a name='header-n586' class='md-header-anchor '></a>4. SpringMVC的执行流程</h3><blockquote><p>1) 用户向服务器发送请求，请求被SpringMVC 前端控制器 DispatcherServlet捕获。</p><p>2) DispatcherServlet对请求URL进行解析，得到请求资源标识符（URI），判断请求URI对应的映射：</p><p>a) 不存在</p><p>i. 再判断是否配置了mvc:default-servlet-handler</p><p>ii. 如果没配置，则控制台报映射查找不到，客户端展示404错误</p></blockquote><p><img src='img/img006.png' alt='image-20210709214911404' referrerPolicy='no-referrer' /></p><p><img src='img/img007.png' alt='image-20210709214947432' referrerPolicy='no-referrer' /></p><blockquote><p>iii. 如果有配置，则访问目标资源（一般为静态资源，如：JS,CSS,HTML），找不到客户端也会展示404错误</p></blockquote><p><img src='img/img008.png' alt='image-20210709215255693' referrerPolicy='no-referrer' /></p><p><img src='img/img009.png' alt='image-20210709215336097' referrerPolicy='no-referrer' /></p><blockquote><p>b) 存在则执行下面的流程</p><p>3) 根据该URI，调用HandlerMapping获得该Handler配置的所有相关的对象（包括Handler对象以及Handler对象对应的拦截器），最后以HandlerExecutionChain执行链对象的形式返回。</p><p>4) DispatcherServlet 根据获得的Handler，选择一个合适的HandlerAdapter。</p><p>5) 如果成功获得HandlerAdapter，此时将开始执行拦截器的preHandler(…)方法【正向】</p><p>6) 提取Request中的模型数据，填充Handler入参，开始执行Handler（Controller)方法，处理请求。在填充Handler的入参过程中，根据你的配置，Spring将帮你做一些额外的工作：</p><p>a) HttpMessageConveter： 将请求消息（如Json、xml等数据）转换成一个对象，将对象转换为指定的响应信息</p><p>b) 数据转换：对请求消息进行数据转换。如String转换成Integer、Double等</p><p>c) 数据格式化：对请求消息进行数据格式化。 如将字符串转换成格式化数字或格式化日期等</p><p>d) 数据验证： 验证数据的有效性（长度、格式等），验证结果存储到BindingResult或Error中</p><p>7) Handler执行完成后，向DispatcherServlet 返回一个ModelAndView对象。</p><p>8) 此时将开始执行拦截器的postHandle(...)方法【逆向】。</p><p>9) 根据返回的ModelAndView（此时会判断是否存在异常：如果存在异常，则执行HandlerExceptionResolver进行异常处理）选择一个适合的ViewResolver进行视图解析，根据Model和View，来渲染视图。</p><p>10) 渲染视图完毕执行拦截器的afterCompletion(…)方法【逆向】。</p><p>11) 将渲染结果返回给客户端。</p></blockquote><h1><a name='header-n614' class='md-header-anchor '></a>十五、SSM整合</h1><h3><a name='header-n615' class='md-header-anchor '></a>1. ContextLoaderListener</h3><blockquote><p>Spring提供了监听器ContextLoaderListener，实现ServletContextListener接口，可监听
+ServletContext的状态，在web服务器的启动，读取Spring的配置文件，创建Spring的IOC容器。web
+应用中必须在web.xml中配置</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n618" mdtype="fences" style="break-inside: unset;">&lt;listener&gt;
+    &lt;!--
+配置Spring的监听器，在服务器启动时加载Spring的配置文件
+Spring配置文件默认位置和名称：/WEB-INF/applicationContext.xml
+可通过上下文参数自定义Spring配置文件的位置和名称
+--&gt;
+    &lt;listener-class&gt;
+        org.springframework.web.context.ContextLoaderListener
+    &lt;/listener-class&gt;
+&lt;/listener&gt;
+&lt;!--自定义Spring配置文件的位置和名称--&gt;
+&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:spring.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+</pre><h3><a name='header-n619' class='md-header-anchor '></a>2. 导入依赖</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n620" mdtype="fences" style="break-inside: unset;">&lt;packaging&gt;war&lt;/packaging&gt;
+&lt;properties&gt;
+    &lt;spring.version&gt;5.3.1&lt;/spring.version&gt;
+&lt;/properties&gt;
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!--springmvc--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- Mybatis核心 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+        &lt;version&gt;3.5.7&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!--mybatis和spring的整合包--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+        &lt;version&gt;2.0.6&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- 连接池 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+        &lt;artifactId&gt;druid&lt;/artifactId&gt;
+        &lt;version&gt;1.0.9&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- junit测试 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.12&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;!-- MySQL驱动 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;8.0.16&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- log4j日志 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;log4j&lt;/groupId&gt;
+        &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+        &lt;version&gt;1.2.17&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;
+        &lt;artifactId&gt;pagehelper&lt;/artifactId&gt;
+        &lt;version&gt;5.2.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- 日志 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+        &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+        &lt;version&gt;1.2.3&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- ServletAPI --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+        &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+        &lt;version&gt;3.1.0&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+        &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+        &lt;version&gt;2.12.1&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+        &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+        &lt;version&gt;1.3.1&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- Spring5和Thymeleaf整合包 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt;
+        &lt;artifactId&gt;thymeleaf-spring5&lt;/artifactId&gt;
+        &lt;version&gt;3.0.12.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</pre><h3><a name='header-n621' class='md-header-anchor '></a>3. 创建表</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="sql" contenteditable="false" cid="n622" mdtype="fences">CREATE TABLE `t_emp` (
+`emp_id` int(11) NOT NULL AUTO_INCREMENT,
+`emp_name` varchar(20) DEFAULT NULL,
+`age` int(11) DEFAULT NULL,
+`sex` char(1) DEFAULT NULL,
+`email` varchar(50) DEFAULT NULL,
+PRIMARY KEY (`emp_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+</pre><h3><a name='header-n623' class='md-header-anchor '></a>4. 配置web.xml</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n624" mdtype="fences" style="break-inside: unset;">&lt;!-- 配置Spring的编码过滤器 --&gt;
+&lt;filter&gt;
+    &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;
+        org.springframework.web.filter.CharacterEncodingFilter
+    &lt;/filter-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;encoding&lt;/param-name&gt;
+        &lt;param-value&gt;UTF-8&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;forceEncoding&lt;/param-name&gt;
+        &lt;param-value&gt;true&lt;/param-value&gt;
+    &lt;/init-param&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+&lt;!-- 配置处理请求方式PUT和DELETE的过滤器 --&gt;
+&lt;filter&gt;
+    &lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.HiddenHttpMethodFilter&lt;/filterclass&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+&lt;!-- 配置SpringMVC的前端控制器 --&gt;
+&lt;servlet&gt;
+    &lt;servlet-name&gt;DispatcherServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servletclass&gt;
+    &lt;!-- 设置SpringMVC的配置文件的位置和名称 --&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;classpath:SpringMVC.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;DispatcherServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+&lt;!-- 设置Spring的配置文件的位置和名称 --&gt;
+&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:Spring.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+&lt;!-- 配置Spring的监听器 --&gt;
+&lt;listener&gt;
+    &lt;listener-class&gt;
+        org.springframework.web.context.ContextLoaderListener
+    &lt;/listener-class&gt;
+&lt;/listener&gt;
+</pre><h3><a name='header-n625' class='md-header-anchor '></a>5. 创建SpringMVC的配置文件并配置</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n626" mdtype="fences" style="break-inside: unset;">&lt;!--扫描组件--&gt;
+&lt;context:component-scan base-package="com.atguigu.ssm.controller"&gt;
+&lt;/context:component-scan&gt;
+&lt;!--配置视图解析器--&gt;
+&lt;bean id="viewResolver"
+      class="org.thymeleaf.spring5.view.ThymeleafViewResolver"&gt;
+    &lt;property name="order" value="1"/&gt;
+    &lt;property name="characterEncoding" value="UTF-8"/&gt;
+    &lt;property name="templateEngine"&gt;
+        &lt;bean class="org.thymeleaf.spring5.SpringTemplateEngine"&gt;
+            &lt;property name="templateResolver"&gt;
+                &lt;bean
+                      class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver"&gt;
+                    &lt;!-- 视图前缀 --&gt;
+                    &lt;property name="prefix" value="/WEB-INF/templates/"/&gt;
+                    &lt;!-- 视图后缀 --&gt;
+                    &lt;property name="suffix" value=".html"/&gt;
+                    &lt;property name="templateMode" value="HTML5"/&gt;
+                    &lt;property name="characterEncoding" value="UTF-8" /&gt;
+                &lt;/bean&gt;
+            &lt;/property&gt;
+        &lt;/bean&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+&lt;!-- 配置访问首页的视图控制 --&gt;
+&lt;mvc:view-controller path="/" view-name="index"&gt;&lt;/mvc:view-controller&gt;
+&lt;!-- 配置默认的servlet处理静态资源 --&gt;
+&lt;mvc:default-servlet-handler /&gt;
+&lt;!-- 开启MVC的注解驱动 --&gt;
+&lt;mvc:annotation-driven /&gt;
+</pre><h3><a name='header-n627' class='md-header-anchor '></a>6. 搭建MyBatis环境</h3><h4><a name='header-n628' class='md-header-anchor '></a>6.1 创建属性文件jdbc.properties</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="properties" contenteditable="false" cid="n629" mdtype="fences">jdbc.user=root
+jdbc.password=123456
+jdbc.url=jdbc:mysql://localhost:3306/ssm?serverTimezone=UTC
+jdbc.driver=com.mysql.cj.jdbc.Driver
+</pre><h4><a name='header-n630' class='md-header-anchor '></a>6.2 创建MyBatis核心配置文件mybatis-config.xml</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n631" mdtype="fences" style="break-inside: unset;">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;
+&lt;configuration&gt;
+    &lt;settings&gt;
+        &lt;!--将下划线映射为驼峰--&gt;
+        &lt;setting name="mapUnderscoreToCamelCase" value="true"/&gt;
+    &lt;/settings&gt;
+    &lt;plugins&gt;
+        &lt;!--配置分页插件--&gt;
+        &lt;plugin interceptor="com.github.pagehelper.PageInterceptor"&gt;&lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/configuration&gt;
+</pre><h4><a name='header-n632' class='md-header-anchor '></a>6.3 创建Mapper接口和映射文件</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n633" mdtype="fences">public interface EmployeeMapper {
+    List&lt;Employee&gt; getEmployeeList();
+}
+</pre><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n634" mdtype="fences">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;
+&lt;mapper namespace="com.atguigu.ssm.mapper.EmployeeMapper"&gt;
+    &lt;select id="getEmployeeList" resultType="Employee"&gt;
+        select * from t_emp
+    &lt;/select&gt;
+&lt;/mapper&gt;
+</pre><h4><a name='header-n635' class='md-header-anchor '></a>6.4 创建日志文件log4j.xml</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n636" mdtype="fences" style="break-inside: unset;">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE log4j:configuration SYSTEM "log4j.dtd"&gt;
+&lt;log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"&gt;
+    &lt;appender name="STDOUT" class="org.apache.log4j.ConsoleAppender"&gt;
+        &lt;param name="Encoding" value="UTF-8" /&gt;
+        &lt;layout class="org.apache.log4j.PatternLayout"&gt;
+            &lt;param name="ConversionPattern" value="%-5p %d{MM-dd HH:mm:ss,SSS}
+                                                   %m (%F:%L) \n" /&gt;
+        &lt;/layout&gt;
+    &lt;/appender&gt;
+    &lt;logger name="java.sql"&gt;
+        &lt;level value="debug" /&gt;
+    &lt;/logger&gt;
+    &lt;logger name="org.apache.ibatis"&gt;
+        &lt;level value="info" /&gt;
+    &lt;/logger&gt;
+    &lt;root&gt;
+        &lt;level value="debug" /&gt;
+        &lt;appender-ref ref="STDOUT" /&gt;
+    &lt;/root&gt;
+&lt;/log4j:configuration&gt;
+</pre><h3><a name='header-n637' class='md-header-anchor '></a>7. 创建Spring配置文件并配置</h3><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="xml" contenteditable="false" cid="n638" mdtype="fences" style="break-inside: unset;">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           https://www.springframework.org/schema/context/spring-context.xsd"&gt;
+    &lt;!--扫描组件--&gt;
+    &lt;context:component-scan base-package="com.atguigu.ssm"&gt;
+        &lt;context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/&gt;
+    &lt;/context:component-scan&gt;
+    &lt;!-- 引入jdbc.properties --&gt;
+    &lt;context:property-placeholder location="classpath:jdbc.properties"&gt;
+    &lt;/context:property-placeholder&gt;
+    &lt;!-- 配置Druid数据源 --&gt;
+    &lt;bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"&gt;
+        &lt;property name="driverClassName" value="${jdbc.driver}"&gt;&lt;/property&gt;
+        &lt;property name="url" value="${jdbc.url}"&gt;&lt;/property&gt;
+        &lt;property name="username" value="${jdbc.username}"&gt;&lt;/property&gt;
+        &lt;property name="password" value="${jdbc.password}"&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+    &lt;!-- 配置用于创建SqlSessionFactory的工厂bean --&gt;
+    &lt;bean class="org.mybatis.spring.SqlSessionFactoryBean"&gt;
+        &lt;!-- 设置MyBatis配置文件的路径（可以不设置） --&gt;
+        &lt;property name="configLocation" value="classpath:mybatis-config.xml"&gt;
+        &lt;/property&gt;
+        &lt;!-- 设置数据源 --&gt;
+        &lt;property name="dataSource" ref="dataSource"&gt;&lt;/property&gt;
+        &lt;!-- 设置类型别名所对应的包 --&gt;
+        &lt;property name="typeAliasesPackage" value="com.atguigu.ssm.pojo"&gt;
+        &lt;/property&gt;
+        &lt;!--
+设置映射文件的路径
+若映射文件所在路径和mapper接口所在路径一致，则不需要设置
+--&gt;
+        &lt;!--
+&lt;property name="mapperLocations" value="classpath:mapper/*.xml"&gt;
+&lt;/property&gt;
+--&gt;
+    &lt;/bean&gt;
+    &lt;!--
+配置mapper接口的扫描配置
+由mybatis-spring提供，可以将指定包下所有的mapper接口创建动态代理
+并将这些动态代理作为IOC容器的bean管理
+--&gt;
+    &lt;bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"&gt;
+        &lt;property name="basePackage" value="com.atguigu.ssm.mapper"&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre><h3><a name='header-n639' class='md-header-anchor '></a>8. 功能测试</h3><h4><a name='header-n640' class='md-header-anchor '></a>8.1 创建组件</h4><blockquote><p>实体类Employee</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n643" mdtype="fences" style="break-inside: unset;">public class Employee {
+    private Integer empId;
+    private String empName;
+    private Integer age;
+    private String sex;
+    private String email;
+    public Employee() {
+    }
+    public Employee(Integer empId, String empName, Integer age, String sex,
+                    String email) {
+        this.empId = empId;
+        this.empName = empName;
+        this.age = age;
+        this.sex = sex;
+        this.email = email;
+    }
+    public Integer getEmpId() {
+        return empId;
+    }
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
+    }
+    public String getEmpName() {
+        return empName;
+    }
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+    public Integer getAge() {
+        return age;
+    }
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+    public String getSex() {
+        return sex;
+    }
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
+</pre><blockquote><p>控制层组件EmployeeController</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n646" mdtype="fences">@Controller
+public class EmployeeController {
+    @Autowired
+    private EmployeeService employeeService;
+    @RequestMapping(value = "/employee/page/{pageNum}", method =
+                    RequestMethod.GET)
+    public String getEmployeeList(Model model, @PathVariable("pageNum") Integer
+                                  pageNum){
+        PageInfo&lt;Employee&gt; page = employeeService.getEmployeeList(pageNum);
+        model.addAttribute("page", page);
+        return "employee_list";
+    }
+}
+</pre><blockquote><p>接口EmployeeService</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n649" mdtype="fences">public interface EmployeeService {
+    PageInfo&lt;Employee&gt; getEmployeeList(Integer pageNum);
+}
+</pre><blockquote><p>实现类EmployeeServiceImpl</p></blockquote><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="java" contenteditable="false" cid="n652" mdtype="fences">@Service
+public class EmployeeServiceImpl implements EmployeeService {
+    @Autowired
+    private EmployeeMapper employeeMapper;
+    @Override
+    public PageInfo&lt;Employee&gt; getEmployeeList(Integer pageNum) {
+        PageHelper.startPage(pageNum, 4);
+        List&lt;Employee&gt; list = employeeMapper.getEmployeeList();
+        PageInfo&lt;Employee&gt; page = new PageInfo&lt;&gt;(list, 5);
+        return page;
+    }
+}
+</pre><h4><a name='header-n653' class='md-header-anchor '></a>8.2 创建页面</h4><pre spellcheck="false" class="md-fences mock-cm md-end-block" lang="html" contenteditable="false" cid="n654" mdtype="fences" style="break-inside: unset;">&lt;!DOCTYPE html&gt;
+&lt;html lang="en" xmlns:th="http://www.thymeleaf.org"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;title&gt;Employee Info&lt;/title&gt;
+        &lt;link rel="stylesheet" th:href="@{/static/css/index_work.css}"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;table&gt;
+            &lt;tr&gt;
+                &lt;th colspan="6"&gt;Employee Info&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;th&gt;emp_id&lt;/th&gt;
+                &lt;th&gt;emp_name&lt;/th&gt;
+                &lt;th&gt;age&lt;/th&gt;
+                &lt;th&gt;sex&lt;/th&gt;
+                &lt;th&gt;email&lt;/th&gt;
+                &lt;th&gt;options&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;tr th:each="employee : ${page.list}"&gt;
+                &lt;td th:text="${employee.empId}"&gt;&lt;/td&gt;
+                &lt;td th:text="${employee.empName}"&gt;&lt;/td&gt;
+                &lt;td th:text="${employee.age}"&gt;&lt;/td&gt;
+                &lt;td th:text="${employee.sex}"&gt;&lt;/td&gt;
+                &lt;td th:text="${employee.email}"&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;a href=""&gt;delete&lt;/a&gt;
+                    &lt;a href=""&gt;update&lt;/a&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td colspan="6"&gt;
+                    &lt;span th:if="${page.hasPreviousPage}"&gt;
+                        &lt;a th:href="@{/employee/page/1}"&gt;首页&lt;/a&gt;
+                        &lt;a th:href="@{'/employee/page/'+${page.prePage}}"&gt;上一页&lt;/a&gt;
+                    &lt;/span&gt;
+                    &lt;span th:each="num : ${page.navigatepageNums}"&gt;
+                        &lt;a th:if="${page.pageNum==num}"
+                           th:href="@{'/employee/page/'+${num}}" th:text="'['+${num}+']'" style="color:
+                                                                                                 red;"&gt;&lt;/a&gt;
+                        &lt;a th:if="${page.pageNum!=num}"
+                           th:href="@{'/employee/page/'+${num}}" th:text="${num} "&gt;&lt;/a&gt;
+                    &lt;/span&gt;
+                    &lt;span th:if="${page.hasNextPage}"&gt;
+                        &lt;a th:href="@{'/employee/page/'+${page.nextPage}}"&gt;下一页&lt;/a&gt;
+                        &lt;a th:href="@{'/employee/page/'+${page.pages}}"&gt;末页&lt;/a&gt;
+                    &lt;/span&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre><h4><a name='header-n655' class='md-header-anchor '></a>8.3 测试分页功能</h4><blockquote><p><a href='http://localhost:8080/employee/page/1' target='_blank' class='url'>http://localhost:8080/employee/page/1</a></p></blockquote><h1><a name='header-n658' class='md-header-anchor '></a>十六、后会有期</h1><blockquote><p>路漫漫其修远兮，吾将上下而求索</p><p>纸上得来终觉浅，绝知此事要躬行</p></blockquote><p>&nbsp;</p></div>
+</body>
+</html>
